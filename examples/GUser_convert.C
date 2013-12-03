@@ -52,6 +52,8 @@ GUser::GUser (GDevice* _fDevIn, GDevice* _fDevOut)
    fVamosCHIO    = new TVamosCHIO();
    fVamosDC      = new TVamosDC();
    fMaya         = new TMaya();
+   fTiaraHyball  = new TTiaraHyball();
+   fTiaraBarrel  = new TTiaraBarrel();
 
    MySpectraList = GetSpectra();
 	cout << "Spectra done" << endl;  
@@ -77,6 +79,8 @@ GUser::~GUser()
    delete fVamosCHIO;
    delete fVamosDC;
    delete fMaya;
+   delete fTiaraHyball;
+   delete fTiaraBarrel;
 
 	gROOT->cd();
 }
@@ -144,6 +148,12 @@ void GUser::InitUserRun()
 	fMaya->Init(GetEvent()->GetDataParameters());
    cout << "End Init Maya"<<endl;
 
+	fTiaraHyball->Init(GetEvent()->GetDataParameters());
+   cout << "End Init Tiara/Hyball"<<endl;
+
+	fTiaraBarrel->Init(GetEvent()->GetDataParameters());
+   cout << "End Init Tiara/Barrel"<<endl;
+
    cout << "End Init run"<<endl;
 
 
@@ -201,6 +211,12 @@ void GUser::InitUserRun()
       else if(fMaya->GetLabelMap(GetDataParameters()->GetLabel(i)) == GetDataParameters()->GetParName(i)) {
          included = true;
       }
+      else if(fTiaraHyball->GetLabelMap(GetDataParameters()->GetLabel(i)) == GetDataParameters()->GetParName(i)) {
+         included = true;
+      }
+      else if(fTiaraBarrel->GetLabelMap(GetDataParameters()->GetLabel(i)) == GetDataParameters()->GetParName(i)) {
+         included = true;
+      }
 
       if (!included) {
          out_rej << i <<" "<<GetDataParameters()->GetParName(i)<<endl;
@@ -255,6 +271,8 @@ void GUser::User()
    bool bVamosCHIO    = false;
    bool bVamosDC      = false;
    bool bMaya         = false;
+   bool bTiaraHyball  = false;
+   bool bTiaraBarrel  = false;
 
    // clear objects
 	fMust2    -> Clear();
@@ -272,6 +290,8 @@ void GUser::User()
    fVamosCHIO    -> Clear();
    fVamosDC      -> Clear();
    fMaya         -> Clear();
+   fTiaraHyball  -> Clear();
+   fTiaraBarrel  -> Clear();
 
    ///////////////////////////
 	//     Unpack events     //
@@ -322,6 +342,12 @@ void GUser::User()
 	   }
       else if (fMaya->Is(GetEventArrayLabelValue_Label(i),GetEventArrayLabelValue_Value(i))) {
 		  bMaya = true;
+	   }
+      else if (fTiaraHyball->Is(GetEventArrayLabelValue_Label(i),GetEventArrayLabelValue_Value(i))) {
+		  bTiaraHyball = true;
+	   }
+      else if (fTiaraBarrel->Is(GetEventArrayLabelValue_Label(i),GetEventArrayLabelValue_Value(i))) {
+		  bTiaraBarrel = true;
 	   }
       else {
             //cout << "not a good label: "<<GetEventArrayLabelValue_Label(i)<<" value: "<<GetEventArrayLabelValue_Value(i)<<endl;
@@ -380,6 +406,8 @@ void GUser::InitTTreeUser()
    fVamosCHIO    -> InitBranch(fTheTree);
    fVamosDC      -> InitBranch(fTheTree);
    fMaya         -> InitBranch(fTheTree);
+   fTiaraHyball  -> InitBranch(fTheTree);
+   fTiaraBarrel  -> InitBranch(fTheTree);
 
   cout<<"End GUser::InitTTreeUser()"<<endl;
 }

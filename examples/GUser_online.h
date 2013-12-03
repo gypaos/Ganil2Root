@@ -47,6 +47,8 @@ using std::ostream;
 #include "TChio_an.h"
 #include "TChio_dig.h"
 #include "TLise.h"
+//#include "TTiaraHyball.h"
+//#include "TTiaraBarrel.h"
 
 using namespace std;
 
@@ -70,6 +72,8 @@ class GUser : public  GAcq
 	TChio_an		   *fChio_an;
 	TChio_dig		   *fChio_dig;
 	TLise			   *fLise;
+//   TTiaraHyball   *fTiaraHyball;
+//   TTiaraBarrle   *fTiaraBarrel;
 	    
  public:
 	GUser(GDevice* _fDevIn= NULL, GDevice* _fDevOut= NULL);  // default constructor of GUser object 

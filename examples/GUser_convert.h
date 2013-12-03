@@ -48,6 +48,8 @@ using std::ostream;
 #include "TChio_an.h"
 #include "TChio_dig.h"
 #include "TLise.h"
+#include "TTiaraHyball.h"
+#include "TTiaraBarrel.h"
 #include "TVamosFinger.h"
 #include "TVamosPlastic.h"
 #include "TVamosCHIO.h"
@@ -81,6 +83,8 @@ class GUser : public  GAcq
    TVamosCHIO    *fVamosCHIO;
    TVamosDC      *fVamosDC;
    TMaya         *fMaya;
+   TTiaraHyball  *fTiaraHyball;
+   TTiaraBarrel  *fTiaraBarrel;
 
  public:
    GUser(GDevice* _fDevIn= NULL, GDevice* _fDevOut= NULL);  // default constructor of GUser object 
