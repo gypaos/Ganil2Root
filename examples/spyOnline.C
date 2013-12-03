@@ -1,7 +1,7 @@
 {  
    gROOT->Reset(); 
 
-   TString GRUpath = gSystem->Getenv("GRUSYS");
+   TString GRUpath = gSystem->Getenv("GRUDIR");
    gROOT->ProcessLine(Form(".include %s/include", GRUpath.Data()));
    gROOT->ProcessLine(".L ./GUser.C++O");   //load and compile GUser class 
 

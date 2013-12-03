@@ -9,7 +9,7 @@
 void ConvertDirectoryBasic(Int_t run_nbr_max = 46, Int_t  run_nbr_min =  1)
 {
    gROOT->Reset();
-   TString GRUpath = gSystem->Getenv("GRUSYS");
+   TString GRUpath = gSystem->Getenv("GRUDIR");
    gROOT->ProcessLine(Form(".include %s/include", GRUpath.Data()));
    gROOT->ProcessLine(".L ./GUser_convert.C++O"); //load and compile GUser class 
 

@@ -3,10 +3,11 @@
 {
   gROOT->Reset(); 
   
-  TString GRUpath = gSystem->Getenv("GRUSYS");
+  TString GRUpath = gSystem->Getenv("GRUDIR");
   gROOT->ProcessLine(Form(".include %s/include", GRUpath.Data()));
 //  gROOT->ProcessLine(".L ./GUser_convert.C++O"); // load and compile GUser class 
   gROOT->ProcessLine(".L ./GUser_convert_C.so"); // load and compile GUser class 
+//  gSystem->Load("./GUser_convert_C.so"); // load and compile GUser class 
  
 //  GTape *file = new GTape("/scratch/gypaos/data/testCOFEE/raw/run_0002.dat.13Apr12_14h09m19s");
 //  GTape *file = new GTape("/scratch/gypaos/GanilData/e530/run/run_0363.dat.20Apr09_11h20m41s");
