@@ -1,0 +1,52 @@
+/*****************************************************************************
+ * Copyright (C) 2009-2010   this file is part of the Ganil2Root Project     *
+ *                                                                           *
+ * For the licensing terms see $GANIL2ROOT/Licence                           *
+ * For the list of contributors see $GANIL2ROOT/README/CREDITS               *
+ *****************************************************************************/
+
+/*****************************************************************************
+ * Original Author: N. de Sereville  contact address: deserevi@ipno.in2p3.fr *
+ *                                                                           *
+ * Creation Date  : April 2011                                               *
+ * Last update    :                                                          *
+ *---------------------------------------------------------------------------*
+ * Decription:                                                               *
+ *      This file describes the installation steps of the Ganil2Root package *
+ *---------------------------------------------------------------------------*
+ * Comment:                                                                  *
+ *                                                                           *
+ *                                                                           *
+ *****************************************************************************/
+
+I) REQUIREMENTS
+	The Ganil2Root package depends on 2 third-party softwares:
+	+ GRU (http://wiki.ganil.fr/gap/browser/Documents/GRUdoc/package)
+	+ NPTOOL (http://gaspard.in2p3.fr/simu.html)
+     !!! Note that only NPLib is needed for Ganil2Root !!!
+
+II) WORKING CONFIGURATIONS
+	The Ganil2Root package has been mainly developped and tested on Linux (32 
+   and 64 bits) and Mac OS X (32 bits).
+	Please, report any working or non-working configuration.
+
+III) INSTALLATION
+   a) Unzip the Ganil2Root.tar.gz tarball in any convenient place on 
+   your system.
+
+	b) First, you need to define some environment variables. You can
+	source the G2REnvironment.bash or G2REnvironment.tchrc file 
+	depending on your shell or include the relevant lines in your
+   .bashrc or .tcshrc file. These files can be found in the Misc
+   directory. Don't forget to customize these files with the relevant 
+   path to your Ganil2Root installation.
+	This step is mandatory since the Makefiles used to build the package
+	depend on some of these environment variables.
+
+	c) Then, you need to build all the libraries.
+	   Go in the libs directory and compile doing:
+		   make distclean
+		   make
+
+   d) You should include in your ROOT installation the rootlogon.C
+      file available in the Ganil2Root/Misc directory

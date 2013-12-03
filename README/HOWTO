@@ -1,0 +1,32 @@
+/*****************************************************************************
+ * Copyright (C) 2009-2010   this file is part of the Ganil2Root Project     *
+ *                                                                           *
+ * For the licensing terms see $GANIL2ROOT/Licence                           *
+ * For the list of contributors see $GANIL2ROOT/README/CREDITS               *
+ *****************************************************************************/
+
+/*****************************************************************************
+ * Original Author: N. de Sereville  contact address: deserevi@ipno.in2p3.fr *
+ *                                                                           *
+ * Creation Date  : April 2011                                               *
+ * Last update    :                                                          *
+ *---------------------------------------------------------------------------*
+ * Decription:                                                               *
+ *      This file describes the installation steps of the Ganil2Root package *
+ *---------------------------------------------------------------------------*
+ * Comment:                                                                  *
+ *                                                                           *
+ *                                                                           *
+ *****************************************************************************/
+
+The Ganil2Root project is fully integrated in the GRU package so the logic is
+to define a GUser.{h,C} class in charge of converting data or to make online
+analysis for example. Then this class is called in a script.
+
+To give and example, consider the ConvertSingleRun.C macro. You need to define
+inside the path to your raw GANIL data file and specify a ROOT output file.
+Then in a terminal do:
+   GRU
+   .x ConvertSingleRun.C++
+
+The conversion of the data is beginning.

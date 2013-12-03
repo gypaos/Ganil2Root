@@ -1,0 +1,12 @@
+Ganil2Root are free libraries released under the GPL2.0 free software licence 
+and which may be freely distributed and modified as long as that disclaimer is 
+always attached to it. The programs are provided as is without any guaranteexs 
+or warranty. Although the authors had attempted to find and correct any bugs in 
+the free software programs, the authors are not responsible for any damage or 
+losses of any kind caused by the use or misuse of the programs. The authors are 
+under no obligation to provide support, service, corrections, or upgrades to the 
+free software programs.
+
+Ganil2Root uses the GRU (Ganil Root Utilities) toolkit for the conversion of 
+GANIL data. Therefore it does not include source code from this project and is 
+not part of them.

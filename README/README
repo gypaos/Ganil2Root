@@ -1,0 +1,55 @@
+/*****************************************************************************
+ * Copyright (C) 2009-2010   this file is part of the Ganil2Root Project     *
+ *                                                                           *
+ * For the licensing terms see $GANIL2ROOT/Licence                           *
+ * For the list of contributors see $GANIL2ROOT/README/CREDITS               *
+ *****************************************************************************/
+
+/*****************************************************************************
+ * Original Author: N. de Sereville  contact address: deserevi@ipno.in2p3.fr *
+ *                                                                           *
+ * Creation Date  : April 2011                                               *
+ * Last update    :                                                          *
+ *---------------------------------------------------------------------------*
+ * Decription:                                                               *
+ *      This file describes the installation steps of the Ganil2Root package *
+ *---------------------------------------------------------------------------*
+ * Comment:                                                                  *
+ *                                                                           *
+ *                                                                           *
+ *****************************************************************************/
+
+The Ganil2Root package is in charge of converting raw data at the GANIL format 
+to raw data in ROOT format based on user specific classes. This package relies
+heavily on the GRU (GANIL Root Utilies) package developped by L. Legeard at 
+GANIL.
+
+The detailed structure of the Ganil2Root package is:
+Ganil2Root / libs
+           / examples
+           / scripts
+           / Misc
+           / README
+
+1) libs
+   This directory contains a class for each detector as well as the TDetector.{h,cxx} 
+   Abstract Base Class. Each detector class should derive from TDetector. Each 
+   class is in charge of defining the name of the parameters defined in the 
+   ACTION file in the GANIL acquisition system. Then a user ROOT data class is
+   filled with the data.
+
+2) examples
+   In this directory, examples of how to convert single or multiple runs at
+   the same time are given. Examples are also given for the online analysis.
+
+3) scripts
+   This directory contains the Ganil2Root.C file which should be sourced in your
+   rootlogon.C file.
+
+4) Misc
+   This directory contains examples of configuration files defining environment
+   variables as well as a typical rootlogon.C file for ROOT.
+
+5) README
+   This directory contains general informations about the package (installation,
+   how it works, ....)

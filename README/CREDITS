@@ -1,0 +1,20 @@
+This file lists the most important contributors to the Ganil2Root project.
+It is sorted by name and formatted to allow easy grepping and beautification
+by scripts. The fields are: name (N), email (E), description (D).
+
+
+N: Geoffroy Burgunder
+E: burgunder@ganil.in2p3.fr
+D: main contributor for Ganil2Root Structure
+
+N: Iolanda Matea
+E: matea@ipno.in2p3.fr
+D: Contributor for the TLise part
+
+N: Nicolas de Sereville
+E: deserevi@ipno.in2p3.fr
+D: main contributor for Ganil2Root Structure
+
+N: Iulian Stefan
+E: stefan@ipno.in2p3.fr
+D: Contributor for the TLise part
