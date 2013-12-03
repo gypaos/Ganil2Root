@@ -1,7 +1,7 @@
 include ./Makefile.arch
 
 INCLUDE_PERSO  = -I$(NPTOOL)/NPLib/include
-INCLUDE_GRU    = -I$(GRUSYS)/include
+INCLUDE_GRU    = -I$(GRUDIR)/include
 
 SRCS = $(wildcard *.cxx)
 OBJS = $(patsubst *.cxx,*.o,$(SRCS))
