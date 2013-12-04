@@ -3,19 +3,21 @@
 
    TString GRUpath = gSystem->Getenv("GRUDIR");
    gROOT->ProcessLine(Form(".include %s/include", GRUpath.Data()));
-   gROOT->ProcessLine(".L ./GUser.C++O");   //load and compile GUser class 
+   gROOT->ProcessLine(".L ./GUser_onlineLC14_C.so");   //load and compile GUser class 
 
-   GNetClientNarval *net = new GNetClientNarval("193.48.111.163"); //
-   net->SetPort(10201);  
+//   GNetClientNarval *net = new GNetClientNarval("193.48.111.163"); //
+   GNetClientNarval *net = new GNetClientNarval("localhost"); //
+   net->SetPort(10202);  
    net->SetBufferSize(65536);
 
-   GUser * a= new GUser(net);  // creat user treatement environement 
-/   GNetServerRoot *serv = new GNetServerRoot(9090, a);
-   a->EventInit("e552");       // event initialisation 
+   GUser *a = new GUser(net);  // create user treatement environement 
+   GNetServerRoot *serv = new GNetServerRoot(9090, a);
+
+   a->EventInit("e644");       // event initialisation 
    a->SetSpectraMode(1);       // Declare all raw parameters as histograms 
    a->SetUserMode(1);	         // execute GUser::InitUser()
-//   a->SetNetMode(1);           // start spectra server
-/   serv->StartServer();
+
+   serv->StartServer();
    a->DoRun();                 // a->DoRun(2000); do treaments on 2000 first events ( 0 = all);
 
    net->Close();                       
