@@ -106,12 +106,12 @@ bool TTiaraHyball::Is(UShort_t lbl, Short_t val)
 		case HYB_RING_E :
 		{  
 			//cout<<  "- ---------< HYB RING E >------------------!\n";
-			fTiaraHyballData->Set_RingE_DetectorNbr(fParameterMap[lbl] / 16);
-			fTiaraHyballData->Set_RingE_StripNbr(fParameterMap[lbl] % 16);
-			fTiaraHyballData->Set_RingE_Energy(val);
-			fTiaraHyballData->Set_RingT_DetectorNbr(fParameterMap[lbl] / 16);
-			fTiaraHyballData->Set_RingT_StripNbr(fParameterMap[lbl] % 16);
-			fTiaraHyballData->Set_RingT_Time(0);
+			fTiaraHyballData->SetRingEDetectorNbr(fParameterMap[lbl] / 16);
+			fTiaraHyballData->SetRingEStripNbr(fParameterMap[lbl] % 16);
+			fTiaraHyballData->SetRingEEnergy(val);
+			fTiaraHyballData->SetRingTDetectorNbr(fParameterMap[lbl] / 16);
+			fTiaraHyballData->SetRingTStripNbr(fParameterMap[lbl] % 16);
+			fTiaraHyballData->SetRingTTime(0);
 			result = true;
 			break;
 		}
@@ -119,12 +119,12 @@ bool TTiaraHyball::Is(UShort_t lbl, Short_t val)
 		case HYB_SECT_E :
 		{  
 			//cout<<  "- ---------< HYB SECT E >------------------!\n";
-			fTiaraHyballData->Set_SectorE_DetectorNbr(fParameterMap[lbl] / 8);
-			fTiaraHyballData->Set_SectorE_StripNbr(fParameterMap[lbl] % 8);
-			fTiaraHyballData->Set_SectorE_Energy(val);
-			fTiaraHyballData->Set_SectorT_DetectorNbr(fParameterMap[lbl] / 8);
-			fTiaraHyballData->Set_SectorT_StripNbr(fParameterMap[lbl] % 8);
-			fTiaraHyballData->Set_SectorT_Time(0);
+			fTiaraHyballData->SetSectorEDetectorNbr(fParameterMap[lbl] / 8);
+			fTiaraHyballData->SetSectorEStripNbr(fParameterMap[lbl] % 8);
+			fTiaraHyballData->SetSectorEEnergy(val);
+			fTiaraHyballData->SetSectorTDetectorNbr(fParameterMap[lbl] / 8);
+			fTiaraHyballData->SetSectorTStripNbr(fParameterMap[lbl] % 8);
+			fTiaraHyballData->SetSectorTTime(0);
 			result = true;
 			break;
 		}
