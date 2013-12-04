@@ -10,10 +10,12 @@
    net->SetBufferSize(65536);
 
    GUser * a= new GUser(net);  // creat user treatement environement 
+/   GNetServerRoot *serv = new GNetServerRoot(9090, a);
    a->EventInit("e552");       // event initialisation 
    a->SetSpectraMode(1);       // Declare all raw parameters as histograms 
    a->SetUserMode(1);	         // execute GUser::InitUser()
-   a->SetNetMode(1);           // start spectra server
+//   a->SetNetMode(1);           // start spectra server
+/   serv->StartServer();
    a->DoRun();                 // a->DoRun(2000); do treaments on 2000 first events ( 0 = all);
 
    net->Close();                       

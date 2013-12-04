@@ -3,7 +3,8 @@
 
 
 
-CLASSNAME    := GUser_convert
+#CLASSNAME    := GUser_convert
+CLASSNAME    := GUser_onlineLC14
 GUSERDIR     := ./
 
 G2RLIB       := $(GANIL2ROOT)/libs/
