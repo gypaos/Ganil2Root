@@ -7,8 +7,13 @@
    gROOT->ProcessLine(".L ./GUser_onlineLC14_C.so"); // load and compile GUser class 
 
    // open data file to read
-//   GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0005.dat.03Dec13_11h11m11s");    // Tiara/Hyball gene run
-   GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0075.dat.04Dec13_17h57m55s");    // Must2 3-alpha run
+//   GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0005.dat.03Dec13_11h11m11s");     // Tiara/Hyball gene run
+//   GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0075.dat.04Dec13_17h57m55s");     // Must2 3-alpha run
+//   GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0012.dat.05Dec13_11h02m27s");     // Tiara/Hyball 3-alpha run
+//   GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0069.dat.02Dec13_17h24m08s");       // CATS 3-alpha run
+//   GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0070.dat.02Dec13_17h49m36s");       // CATS 3-alpha run
+//   GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0007.dat.28Nov13_16h58m46s");       // CATS 3-alpha run
+   GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0008.dat.28Nov13_18h05m47s");       // CATS 3-alpha run
    file->Open();
 
    // define GUser

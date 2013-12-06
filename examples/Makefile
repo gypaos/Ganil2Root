@@ -1,5 +1,6 @@
 # Makefile for the ROOT test programs.
 # This Makefile shows nicely how to compile and link applications
+include ../libs/Makefile.arch
 
 
 

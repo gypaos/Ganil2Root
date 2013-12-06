@@ -13,7 +13,8 @@
 //  GTape *file = new GTape("/scratch/gypaos/data/testCOFEE/raw/run_0002.dat.13Apr12_14h09m19s");
 //  GTape *file = new GTape("/scratch/gypaos/GanilData/e530/run/run_0363.dat.20Apr09_11h20m41s");
 //  GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0005.dat.03Dec13_11h11m11s");
-  GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0075.dat.04Dec13_17h57m55s");
+//  GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0075.dat.04Dec13_17h57m55s");
+  GTape *file = new GTape("/scratch/gypaos/GanilData/e628/run_0012.dat.05Dec13_11h02m27s");
   file->Open();
 
   GUser * a= new GUser(file); 
@@ -29,10 +30,10 @@
   cout << "======== Debug END DoRun() =========" << endl;
 
   
-  file->Close();
+//  file->Close();
   a->EndUser();                       // must be explicitly called , if it needs
   a->SpeSave("histo.root");   // save all declared histogram 
-  delete (a);                         // finish 
+//  delete (a);                         // finish 
 
   // gROOT->ProcessLine(".q");
 }

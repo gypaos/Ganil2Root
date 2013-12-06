@@ -30,6 +30,7 @@
 #include "NPOptionManager.h"
 #include "TTiaraHyballPhysics.h"
 #include "TMust2Physics.h"
+#include "TCATSPhysics.h"
 
 // C++ headers
 #include <iostream>
@@ -113,6 +114,7 @@ void GUser::InitUser()
 
    // connect data objects to the physics
    // need to be done detector by detector
+   ((TCATSPhysics*)        fMyDetector->GetDetector("CATS"))        -> SetRawDataPointer(fCATS        -> GetCATSData());
    ((TMust2Physics*)       fMyDetector->GetDetector("MUST2"))       -> SetRawDataPointer(fMust2       -> GetMust2Data());
    ((TTiaraHyballPhysics*) fMyDetector->GetDetector("TiaraHyball")) -> SetRawDataPointer(fTiaraHyball -> GetTiaraHyballData());
 }
