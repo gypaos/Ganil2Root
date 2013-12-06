@@ -68,55 +68,55 @@ bool TCharissa::Init(GDataParameters *params)
 			status = true;
 			fLabelMap[lbl]	 = label;
 	     
-         if (label.compare(5,2,"L1") == 0) {
-            if (label.compare(8,6,"STRX_E") == 0 ) 
+         if (label.compare(5,2,"DE") == 0) {
+            if (label.compare(8,3,"X_E") == 0 ) 
             {
-               fTypeMap[lbl] = CHA_L1_STR_XE;
-               channum = atoi(label.substr(14).c_str());
+               fTypeMap[lbl] = CHA_DE_X_E;
+               channum = atoi(label.substr(9).c_str());
                fParameterMap[lbl] = channum;                 // Charissa strip number 0 - 15
             } 
-            else if (label.compare(8,6,"STRX_T") == 0 ) 
+            else if (label.compare(8,3,"X_T") == 0 ) 
             {
-               fTypeMap[lbl] = CHA_L1_STR_XT;
-               channum = atoi(label.substr(14).c_str());
+               fTypeMap[lbl] = CHA_DE_X_T;
+               channum = atoi(label.substr(9).c_str());
                fParameterMap[lbl] = channum;                 // Charissa strip number 0 - 15
             }
-            else if (label.compare(4,6,"STRY_E") == 0 ) 
+            else if (label.compare(4,6,"Y_E") == 0 ) 
             {
-               fTypeMap[lbl] = CHA_L1_STR_YE;
-               channum = atoi(label.substr(14).c_str());
+               fTypeMap[lbl] = CHA_DE_Y_E;
+               channum = atoi(label.substr(9).c_str());
                fParameterMap[lbl] = channum;                 // Charissa strip number 0 - 15
             } 
-            else if (label.compare(4,6,"STRY_T") == 0 ) 
+            else if (label.compare(4,6,"Y_T") == 0 ) 
             {
-               fTypeMap[lbl] = CHA_L1_STR_YT;
-               channum = atoi(label.substr(14).c_str());
+               fTypeMap[lbl] = CHA_DE_Y_T;
+               channum = atoi(label.substr(9).c_str());
                fParameterMap[lbl] = channum;                 // Charissa strip number 0 - 15
             }
          }
-         else if (label.compare(5,2,"L2") == 0) {
-            if (label.compare(8,6,"STRX_E") == 0 ) 
+         else if (label.compare(5,1,"E") == 0) {
+            if (label.compare(8,3,"X_E") == 0 ) 
             {
-               fTypeMap[lbl] = CHA_L2_STR_XE;
-               channum = atoi(label.substr(14).c_str());
+               fTypeMap[lbl] = CHA_E_X_E;
+               channum = atoi(label.substr(9).c_str());
                fParameterMap[lbl] = channum;                 // Charissa strip number 0 - 15
             } 
-            else if (label.compare(8,6,"STRX_T") == 0 ) 
+            else if (label.compare(8,3,"X_T") == 0 ) 
             {
-               fTypeMap[lbl] = CHA_L2_STR_XT;
-               channum = atoi(label.substr(14).c_str());
+               fTypeMap[lbl] = CHA_E_X_T;
+               channum = atoi(label.substr(9).c_str());
                fParameterMap[lbl] = channum;                 // Charissa strip number 0 - 15
             }
-            else if (label.compare(4,6,"STRY_E") == 0 ) 
+            else if (label.compare(4,6,"Y_E") == 0 ) 
             {
-               fTypeMap[lbl] = CHA_L2_STR_YE;
-               channum = atoi(label.substr(14).c_str());
+               fTypeMap[lbl] = CHA_E_Y_E;
+               channum = atoi(label.substr(9).c_str());
                fParameterMap[lbl] = channum;                 // Charissa strip number 0 - 15
             } 
-            else if (label.compare(4,6,"STRY_T") == 0 ) 
+            else if (label.compare(4,6,"Y_T") == 0 ) 
             {
-               fTypeMap[lbl] = CHA_L2_STR_YT;
-               channum = atoi(label.substr(14).c_str());
+               fTypeMap[lbl] = CHA_E_Y_T;
+               channum = atoi(label.substr(9).c_str());
                fParameterMap[lbl] = channum;                 // Charissa strip number 0 - 15
             }
          }
@@ -151,7 +151,7 @@ bool TCharissa::Is(UShort_t lbl, Short_t val)
 	switch (fTypeMap[lbl]) 
 	{
     
-		case CHA_L1_STR_XE :
+		case CHA_DE_X_E :
 		{  
 			//cout<<  "- ---------< STR X E >------------------!\n";
 			det = atoi(fLabelMap[lbl].substr(3,1).c_str());
@@ -165,7 +165,7 @@ bool TCharissa::Is(UShort_t lbl, Short_t val)
 			break;
 		}
      
-		case CHA_L1_STR_YE :
+		case CHA_DE_Y_E :
 		{  
 			//cout<<  "- ---------< STR X E >------------------!\n";
 			det = atoi(fLabelMap[lbl].substr(3,1).c_str());
@@ -179,7 +179,7 @@ bool TCharissa::Is(UShort_t lbl, Short_t val)
 			break;
 		}
      
-		case CHA_L2_STR_XE :
+		case CHA_E_X_E :
 		{  
 			//cout<<  "- ---------< STR X E >------------------!\n";
 			det = atoi(fLabelMap[lbl].substr(3,1).c_str());
@@ -193,7 +193,7 @@ bool TCharissa::Is(UShort_t lbl, Short_t val)
 			break;
 		}
      
-		case CHA_L2_STR_YE :
+		case CHA_E_Y_E :
 		{  
 			//cout<<  "- ---------< STR X E >------------------!\n";
 			det = atoi(fLabelMap[lbl].substr(3,1).c_str());

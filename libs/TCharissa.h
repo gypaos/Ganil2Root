@@ -32,14 +32,14 @@
 #include "GDataParameters.h"
 #include "TTree.h"
 
-#define CHA_L1_STR_XE	1
-#define CHA_L1_STR_XT	2
-#define CHA_L1_STR_YE	3
-#define CHA_L1_STR_YT	4
-#define CHA_L2_STR_XE	5
-#define CHA_L2_STR_XT	6
-#define CHA_L2_STR_YE	7
-#define CHA_L2_STR_YT	8
+#define CHA_DE_X_E	1
+#define CHA_DE_X_T	2
+#define CHA_DE_Y_E	3
+#define CHA_DE_Y_T	4
+#define CHA_E_X_E	5
+#define CHA_E_X_T	6
+#define CHA_E_Y_E	7
+#define CHA_E_Y_T	8
 #define CHA_CSI_E	      9
 #define CHA_CSI_T       10
 
