@@ -25,13 +25,6 @@ ExeSuf        =
 DllSuf        = so
 OutPutOpt     = -o 
 
-# Compilateur et options
-CXX           = g++
-CXXFLAGS      = -O -Wall -fPIC
-LD            = g++
-LDFLAGS       = -O
-SOFLAGS       = -shared
-
 # Options de ROOT
 ROOTCFLAGS   := $(shell root-config --cflags) -I$(ROOTSYS)/xmlparser/inc -I$(ROOTSYS)/io/xmlparser/inc
 ROOTLIBS     := $(shell root-config --libs) -lHtml -lSpectrum
