@@ -65,7 +65,7 @@ bool TTiaraBarrel::Init(GDataParameters *params)
 		{
 			status = true;
 			fLabelMap[lbl]	 = label;
-	     
+
 			if (label.compare(4,1,"I") == 0) {             // inner barrel
             if (label.compare(13,1,"U") == 0) {
                fTypeMap[lbl] = IBAR_UP_STRIP_E;
@@ -73,7 +73,7 @@ bool TTiaraBarrel::Init(GDataParameters *params)
                barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
                // strip number
                channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
-               fParameterMap[lbl] = (barrel-1)*4 + channum; 
+               fParameterMap[lbl] = (barrel)*4 + channum; 
             } 
             else if (label.compare(13,1,"D") == 0) {
                fTypeMap[lbl] = IBAR_DO_STRIP_E;
@@ -81,7 +81,7 @@ bool TTiaraBarrel::Init(GDataParameters *params)
                barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
                // strip number
                channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
-               fParameterMap[lbl] = (barrel-1)*4 + channum; 
+               fParameterMap[lbl] = (barrel)*4 + channum; 
             }
             else if (label.compare(11,3,"BCK") == 0) {
                fTypeMap[lbl] = IBAR_BACK_E;
@@ -95,7 +95,7 @@ bool TTiaraBarrel::Init(GDataParameters *params)
             barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
             // strip number
             channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
-            fParameterMap[lbl] = (barrel-1)*4 + channum; 
+            fParameterMap[lbl] = (barrel)*4 + channum; 
          }
          else 
          {
@@ -113,17 +113,17 @@ bool TTiaraBarrel::Init(GDataParameters *params)
 bool TTiaraBarrel::Is(UShort_t lbl, Short_t val)
 {
 	bool result = false;
-
 	switch (fTypeMap[lbl]) 
 	{
 		case IBAR_UP_STRIP_E :
 		{  
 			//cout<<  "- --------- IBAR UP E  >------------------!\n";
-			fTiaraBarrelData->SetFrontUpstreamEDetectorNbr(fParameterMap[lbl] / 4);
-			fTiaraBarrelData->SetFrontUpstreamEStripNbr(fParameterMap[lbl] % 4);
+			
+			fTiaraBarrelData->SetFrontUpstreamEDetectorNbr(fParameterMap[lbl] / 4 + 1);
+			fTiaraBarrelData->SetFrontUpstreamEStripNbr(fParameterMap[lbl] % 4 +1 );
 			fTiaraBarrelData->SetFrontUpstreamEEnergy(val);
-			fTiaraBarrelData->SetFrontUpstreamTDetectorNbr(fParameterMap[lbl] / 4);
-			fTiaraBarrelData->SetFrontUpstreamTStripNbr(fParameterMap[lbl] % 4);
+			fTiaraBarrelData->SetFrontUpstreamTDetectorNbr(fParameterMap[lbl] / 4+1 );
+			fTiaraBarrelData->SetFrontUpstreamTStripNbr(fParameterMap[lbl] % 4+1);
 			fTiaraBarrelData->SetFrontUpstreamTTime(0);
 			result = true;
 			break;
@@ -132,11 +132,11 @@ bool TTiaraBarrel::Is(UShort_t lbl, Short_t val)
 		case IBAR_DO_STRIP_E :
 		{  
 			//cout<<  "- --------- IBAR DOWN E  >------------------!\n";
-			fTiaraBarrelData->SetFrontDownstreamEDetectorNbr(fParameterMap[lbl] / 4);
-			fTiaraBarrelData->SetFrontDownstreamEStripNbr(fParameterMap[lbl] % 4);
+			fTiaraBarrelData->SetFrontDownstreamEDetectorNbr(fParameterMap[lbl] / 4+1);
+			fTiaraBarrelData->SetFrontDownstreamEStripNbr(fParameterMap[lbl] % 4+1);
 			fTiaraBarrelData->SetFrontDownstreamEEnergy(val);
-			fTiaraBarrelData->SetFrontDownstreamTDetectorNbr(fParameterMap[lbl] / 4);
-			fTiaraBarrelData->SetFrontDownstreamTStripNbr(fParameterMap[lbl] % 4);
+			fTiaraBarrelData->SetFrontDownstreamTDetectorNbr(fParameterMap[lbl] / 4+1);
+			fTiaraBarrelData->SetFrontDownstreamTStripNbr(fParameterMap[lbl] % 4+1);
 			fTiaraBarrelData->SetFrontDownstreamTTime(0);
 			result = true;
 			break;
@@ -156,11 +156,11 @@ bool TTiaraBarrel::Is(UShort_t lbl, Short_t val)
 		case OBAR_E :
 		{  
 			//cout<<  "- --------- OBAR E  >------------------!\n";
-			fTiaraBarrelData->SetOuterEDetectorNbr(fParameterMap[lbl] / 4);
-			fTiaraBarrelData->SetOuterEStripNbr(fParameterMap[lbl] % 4);
+			fTiaraBarrelData->SetOuterEDetectorNbr(fParameterMap[lbl] / 4+1);
+			fTiaraBarrelData->SetOuterEStripNbr(fParameterMap[lbl] % 4+1);
 			fTiaraBarrelData->SetOuterEEnergy(val);
-			fTiaraBarrelData->SetOuterTDetectorNbr(fParameterMap[lbl] / 4);
-			fTiaraBarrelData->SetOuterTStripNbr(fParameterMap[lbl] % 4);
+			fTiaraBarrelData->SetOuterTDetectorNbr(fParameterMap[lbl] / 4+1);
+			fTiaraBarrelData->SetOuterTStripNbr(fParameterMap[lbl] % 4+1);
 			fTiaraBarrelData->SetOuterTTime(0);
 			result = true;
 			break;
