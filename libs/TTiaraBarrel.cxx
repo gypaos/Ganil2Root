@@ -73,7 +73,7 @@ bool TTiaraBarrel::Init(GDataParameters *params)
                barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
                // strip number
                channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
-               fParameterMap[lbl] = barrel*4 + channum; 
+               fParameterMap[lbl] = (barrel-1)*4 + channum; 
             } 
             else if (label.compare(13,1,"D") == 0) {
                fTypeMap[lbl] = IBAR_DO_STRIP_E;
@@ -81,7 +81,7 @@ bool TTiaraBarrel::Init(GDataParameters *params)
                barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
                // strip number
                channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
-               fParameterMap[lbl] = barrel*4 + channum; 
+               fParameterMap[lbl] = (barrel-1)*4 + channum; 
             }
             else if (label.compare(11,3,"BCK") == 0) {
                fTypeMap[lbl] = IBAR_BACK_E;
@@ -95,7 +95,7 @@ bool TTiaraBarrel::Init(GDataParameters *params)
             barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
             // strip number
             channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
-            fParameterMap[lbl] = barrel*4 + channum; 
+            fParameterMap[lbl] = (barrel-1)*4 + channum; 
          }
          else 
          {
