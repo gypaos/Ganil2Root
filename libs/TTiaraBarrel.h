@@ -34,8 +34,8 @@
 
 #define IBAR_UP_STRIP_E	1
 #define IBAR_DO_STRIP_E	2
-#define IBAR_BACK_E	   3  
-#define OBAR_E	         4  
+#define IBAR_BACK_E	    3  
+#define OBAR_E	        4  
 
 class TTiaraBarrel : public TDetector 
 {

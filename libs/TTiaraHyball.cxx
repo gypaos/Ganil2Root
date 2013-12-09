@@ -74,7 +74,7 @@ bool TTiaraHyball::Init(GDataParameters *params)
 				wedge = atoi(label.substr(9,1).c_str());        // wedge number 0 - 7
             // ring number
 				channum = atoi(label.substr(11).c_str());       // ring number 0 - 15
-				fParameterMap[lbl] = wedge*16 + channum;
+				fParameterMap[lbl] = (wedge-1)*16 + channum-1;
 			} 
 			else if (label.compare(10,1,"S") == 0 ) 
 			{
@@ -83,7 +83,7 @@ bool TTiaraHyball::Init(GDataParameters *params)
 				wedge = atoi(label.substr(9,1).c_str());        // wedge number 0 - 7
             // sector number
 				channum = atoi(label.substr(11).c_str());       // sector number 0 - 7
-				fParameterMap[lbl] = wedge*8 + channum;
+				fParameterMap[lbl] = (wedge-1)*8 + channum-1;
 			}
 			else 
 			{
@@ -106,11 +106,11 @@ bool TTiaraHyball::Is(UShort_t lbl, Short_t val)
 		case HYB_RING_E :
 		{  
 			//cout<<  "- ---------< HYB RING E >------------------!\n";
-			fTiaraHyballData->SetRingEDetectorNbr(fParameterMap[lbl] / 16);
-			fTiaraHyballData->SetRingEStripNbr(fParameterMap[lbl] % 16);
+			fTiaraHyballData->SetRingEDetectorNbr(fParameterMap[lbl] / 16+1);
+			fTiaraHyballData->SetRingEStripNbr(fParameterMap[lbl] % 16+1);
 			fTiaraHyballData->SetRingEEnergy(val);
-			fTiaraHyballData->SetRingTDetectorNbr(fParameterMap[lbl] / 16);
-			fTiaraHyballData->SetRingTStripNbr(fParameterMap[lbl] % 16);
+			fTiaraHyballData->SetRingTDetectorNbr(fParameterMap[lbl] / 16+1);
+			fTiaraHyballData->SetRingTStripNbr(fParameterMap[lbl] % 16+1);
 			fTiaraHyballData->SetRingTTime(0);
 			result = true;
 			break;
@@ -119,11 +119,11 @@ bool TTiaraHyball::Is(UShort_t lbl, Short_t val)
 		case HYB_SECT_E :
 		{  
 			//cout<<  "- ---------< HYB SECT E >------------------!\n";
-			fTiaraHyballData->SetSectorEDetectorNbr(fParameterMap[lbl] / 8);
-			fTiaraHyballData->SetSectorEStripNbr(fParameterMap[lbl] % 8);
+			fTiaraHyballData->SetSectorEDetectorNbr(fParameterMap[lbl] / 8+1);
+			fTiaraHyballData->SetSectorEStripNbr(fParameterMap[lbl] % 8+1);
 			fTiaraHyballData->SetSectorEEnergy(val);
-			fTiaraHyballData->SetSectorTDetectorNbr(fParameterMap[lbl] / 8);
-			fTiaraHyballData->SetSectorTStripNbr(fParameterMap[lbl] % 8);
+			fTiaraHyballData->SetSectorTDetectorNbr(fParameterMap[lbl] / 8+1);
+			fTiaraHyballData->SetSectorTStripNbr(fParameterMap[lbl] % 8+1);
 			fTiaraHyballData->SetSectorTTime(0);
 			result = true;
 			break;

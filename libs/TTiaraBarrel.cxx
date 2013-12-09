@@ -61,7 +61,8 @@ bool TTiaraBarrel::Init(GDataParameters *params)
 		Int_t lbl      = params->GetLabel(index);
 		string label   = params->GetParName(index);
 		if (label.compare(0,3,"TIA") == 0  &&  label.compare(5,3,"BAR") == 0) 
-		{
+		{ 
+      
 			status = true;
 			fLabelMap[lbl]	 = label;
 			if (label.compare(4,1,"I") == 0) {             // inner barrel
@@ -71,7 +72,7 @@ bool TTiaraBarrel::Init(GDataParameters *params)
                barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
                // strip number
                channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
-               fParameterMap[lbl] = (barrel)*4 + channum; 
+               fParameterMap[lbl] = (barrel-1)*4 + channum-1; 
             } 
             else if (label.compare(13,1,"D") == 0) {
                fTypeMap[lbl] = IBAR_DO_STRIP_E;
@@ -79,7 +80,7 @@ bool TTiaraBarrel::Init(GDataParameters *params)
                barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
                // strip number
                channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
-               fParameterMap[lbl] = (barrel)*4 + channum; 
+               fParameterMap[lbl] = (barrel-1)*4 + channum-1; 
             }
             else if (label.compare(11,3,"BCK") == 0) {
                fTypeMap[lbl] = IBAR_BACK_E;
@@ -93,7 +94,7 @@ bool TTiaraBarrel::Init(GDataParameters *params)
             barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
             // strip number
             channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
-            fParameterMap[lbl] = (barrel)*4 + channum; 
+            fParameterMap[lbl] = (barrel-1)*4 + channum-1; 
          }
          else 
          {
@@ -113,7 +114,7 @@ bool TTiaraBarrel::Is(UShort_t lbl, Short_t val)
 	switch (fTypeMap[lbl]) 
 	{
 		case IBAR_UP_STRIP_E :
-		{ 
+		{
 			//cout<<  "- --------- IBAR UP E  >------------------!\n";
 			fTiaraBarrelData->SetFrontUpstreamEDetectorNbr(fParameterMap[lbl] / 4 + 1);
 			fTiaraBarrelData->SetFrontUpstreamEStripNbr(fParameterMap[lbl] % 4 +1 );
