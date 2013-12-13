@@ -97,7 +97,7 @@ bool TExogam::Init(GDataParameters *params)
 //            cout << label << " " << fTypeMap[lbl] << "  " << fParameterMap[lbl] << endl;
 	 }
 	 else {
-	   cout << "TExogam::Init() : problem reading EXOGAM/ECC label" << endl;
+	   cout << "TExogam::Init() : problem reading EXOGAM/ECC label: " <<  label << endl;
 	    status = false;
 	 }
       }
@@ -139,7 +139,7 @@ bool TExogam::Init(GDataParameters *params)
 	    fParameterMap[lbl] = channum*16 + Xtalnum*4 + segnum;
 	 }
 	 else {
-	    cout << "TExogam::Init() : problem reading EXOGAM/GOCCE label" << endl;
+	    cout << "TExogam::Init() : problem reading EXOGAM/GOCCE label : " << label <<  endl;
 	    status = false;
 	 }
       }
