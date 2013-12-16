@@ -150,12 +150,9 @@ bool TCharissa::Is(UShort_t lbl, Short_t val)
       {  
         //cout<<  "- ---------< STR X E >------------------!\n";
         det = atoi(fLabelMap[lbl].substr(3,1).c_str());
-        fCharissaData->SetCharissaLayer1StripXEDetectorNbr(det);
+        fCharissaData->SetCharissaLayer1StripXEDetectorNbr(det+1);
         fCharissaData->SetCharissaLayer1StripXEStripNbr(fParameterMap[lbl]);
         fCharissaData->SetCharissaLayer1StripXEEnergy(val);
-        fCharissaData->SetCharissaLayer1StripXTDetectorNbr(det);
-        fCharissaData->SetCharissaLayer1StripXTStripNbr(fParameterMap[lbl]);
-        fCharissaData->SetCharissaLayer1StripXTTime(0);
         result = true;
         break;
       }
@@ -164,12 +161,9 @@ bool TCharissa::Is(UShort_t lbl, Short_t val)
       {  
         //cout<<  "- ---------< STR X E >------------------!\n";
         det = atoi(fLabelMap[lbl].substr(3,1).c_str());
-        fCharissaData->SetCharissaLayer1StripYEDetectorNbr(det);
+        fCharissaData->SetCharissaLayer1StripYEDetectorNbr(det+1);
         fCharissaData->SetCharissaLayer1StripYEStripNbr(fParameterMap[lbl]);
         fCharissaData->SetCharissaLayer1StripYEEnergy(val);
-        fCharissaData->SetCharissaLayer1StripYTDetectorNbr(det);
-        fCharissaData->SetCharissaLayer1StripYTStripNbr(fParameterMap[lbl]);
-        fCharissaData->SetCharissaLayer1StripYTTime(0);
         result = true;
         break;
       }
@@ -178,12 +172,9 @@ bool TCharissa::Is(UShort_t lbl, Short_t val)
       {  
         //cout<<  "- ---------< STR X E >------------------!\n";
         det = atoi(fLabelMap[lbl].substr(3,1).c_str());
-        fCharissaData->SetCharissaLayer2StripXEDetectorNbr(det);
+        fCharissaData->SetCharissaLayer2StripXEDetectorNbr(det+1);
         fCharissaData->SetCharissaLayer2StripXEStripNbr(fParameterMap[lbl]);
         fCharissaData->SetCharissaLayer2StripXEEnergy(val);
-        fCharissaData->SetCharissaLayer2StripXTDetectorNbr(det);
-        fCharissaData->SetCharissaLayer2StripXTStripNbr(fParameterMap[lbl]);
-        fCharissaData->SetCharissaLayer2StripXTTime(0);
         result = true;
         break;
       }
@@ -192,12 +183,9 @@ bool TCharissa::Is(UShort_t lbl, Short_t val)
       {  
         //cout<<  "- ---------< STR X E >------------------!\n";
         det = atoi(fLabelMap[lbl].substr(3,1).c_str());
-        fCharissaData->SetCharissaLayer2StripYEDetectorNbr(det);
+        fCharissaData->SetCharissaLayer2StripYEDetectorNbr(det+1);
         fCharissaData->SetCharissaLayer2StripYEStripNbr(fParameterMap[lbl]);
         fCharissaData->SetCharissaLayer2StripYEEnergy(val);
-        fCharissaData->SetCharissaLayer2StripYTDetectorNbr(det);
-        fCharissaData->SetCharissaLayer2StripYTStripNbr(fParameterMap[lbl]);
-        fCharissaData->SetCharissaLayer2StripYTTime(0);
         result = true;
         break;
       }
@@ -206,12 +194,9 @@ bool TCharissa::Is(UShort_t lbl, Short_t val)
       {  
         //cout<<  "- ---------<  CSI E  >------------------!\n";
         det = atoi(fLabelMap[lbl].substr(3,1).c_str());
-        fCharissaData->SetCharissaCsIEDetectorNbr(det);
+        fCharissaData->SetCharissaCsIEDetectorNbr(det+1);
         fCharissaData->SetCharissaCsIECristalNbr(fParameterMap[lbl]);
         fCharissaData->SetCharissaCsIEEnergy(val);
-        fCharissaData->SetCharissaCsITDetectorNbr(det);
-        fCharissaData->SetCharissaCsITCristalNbr(fParameterMap[lbl]);
-        fCharissaData->SetCharissaCsITTime(0);
         result = true;
         break;
       }
