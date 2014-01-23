@@ -57,8 +57,7 @@ bool TCharissa::Init(GDataParameters *params){
 	Int_t nbParams = params->GetNbParameters();
 	bool status = false;
 
-	for (Int_t index = 0; index < nbParams; index++) 
-	{
+	for (Int_t index = 0; index < nbParams; index++) {
 		Int_t lbl      = params->GetLabel(index);
 		string label   = params->GetParName(index);
 
@@ -131,6 +130,18 @@ bool TCharissa::Init(GDataParameters *params){
 				  status = false;
 			  }
     }
+  
+    // Special Case for e628
+    else if (label.compare(0,4,"ECsI") == 0 ){
+				  fTypeMap[lbl] = CHA_CSI_E;
+				  fParameterMap[lbl] = 1;                          // Charissa CsI number 1
+    } 
+			  
+    else if (label.compare(0,4,"TCsI") == 0 ){
+				  fTypeMap[lbl] = CHA_CSI_T;
+				  fParameterMap[lbl] = 1;                          // Charissa CsI number 1
+	  }
+
   } 
 
   return status;
@@ -192,10 +203,18 @@ bool TCharissa::Is(UShort_t lbl, Short_t val)
 
     case CHA_CSI_E :
       {  
-        //cout<<  "- ---------<  CSI E  >------------------!\n";
+        // The following line are correct, but e628 have wrong label
+       /* //cout<<  "- ---------<  CSI E  >------------------!\n";
         det = atoi(fLabelMap[lbl].substr(3,1).c_str());
         fCharissaData->SetCharissaCsIEDetectorNbr(det+1);
         fCharissaData->SetCharissaCsIECristalNbr(fParameterMap[lbl]);
+        fCharissaData->SetCharissaCsIEEnergy(val);
+        result = true;
+        break;*/
+
+        // Specific to e628        
+        fCharissaData->SetCharissaCsIEDetectorNbr(1);
+        fCharissaData->SetCharissaCsIECristalNbr(1);
         fCharissaData->SetCharissaCsIEEnergy(val);
         result = true;
         break;
