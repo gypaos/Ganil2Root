@@ -44,12 +44,12 @@ bool TModularLabel::Clear(){
 
 ////////////////////////////////////////////////////
 void TModularLabel::LoadLabel(string path){
-   fstream file(path);
+  fstream file(path);
 
-   if(!file.is_open()){
+  if(!file.is_open()){
     cout << "ERROR : The requested list of Modular Label " << path << " can not be found " << endl ; 
     exit(1);
-   } 
+  } 
 
   string DataBuffer;
   while(file>>DataBuffer){
@@ -91,30 +91,46 @@ bool TModularLabel::Is(UShort_t lbl, Short_t val){
 
   // Find lbl in the map
   if(fMapOfLabelValue.find(lbl)!=fMapOfLabelValue.end()){
-      fMapOfLabelValue[lbl] = val;
-      result=true;
+    fMapOfLabelValue[lbl] = val;
+    result=true;
   }
   // if found assigned val to the map entry
 
 
   return result;
 }
+
 ////////////////////////////////////////////////////
 bool TModularLabel::Treat(){
   return true;
 }
+
 ////////////////////////////////////////////////////
 void TModularLabel::InitBranch(TTree *tree){
   set<string>::iterator it; 
   map<UShort_t,Short_t>::iterator it2 ;
-  
+
   // Sync loop over set and map
   for(it=fFollowedLabel.begin(), it2=fMapOfLabelValue.begin(); it!=fFollowedLabel.end() || it2!=fMapOfLabelValue.end(); it++,it2++){
-      string BranchName = (*it);
-      string VariableName = BranchName+"/S";
-      
-      tree->Branch(BranchName.c_str(), &it2->second);
-    }
+    string BranchName = (*it);
+    string VariableName = BranchName+"/S";
+
+    tree->Branch(BranchName.c_str(), &it2->second);
+  }
 }
 
+////////////////////////////////////////////////////
+Short_t TModularLabel::GetValue(string label){
+  set<string>::iterator it;
+  map<UShort_t,Short_t>::iterator it2 ;
+
+  // Sync loop over set and map
+  for(it=fFollowedLabel.begin(), it2=fMapOfLabelValue.begin(); it!=fFollowedLabel.end() || it2!=fMapOfLabelValue.end(); it++,it2++){
+    if(*it == label )
+      return it2->second;
+  }
+
+return -1000;
+
+}
 

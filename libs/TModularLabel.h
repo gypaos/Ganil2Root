@@ -61,7 +61,8 @@ class TModularLabel : public TDetector {
     void LoadLabel(string path);
     inline map<UShort_t,Short_t>  GetMapOfLabelValue()    {return fMapOfLabelValue;} 
 	  inline set<string>            GetFollowedLabel()      {return fFollowedLabel;}
-
+    Short_t GetValue(string label);
+  
   ClassDef(TModularLabel,1)  // MUST2 detector structure
 };
 
