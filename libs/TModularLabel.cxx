@@ -44,7 +44,7 @@ bool TModularLabel::Clear(){
 
 ////////////////////////////////////////////////////
 void TModularLabel::LoadLabel(string path){
-  fstream file(path);
+  fstream file(path.c_str());
 
   if(!file.is_open()){
     cout << "ERROR : The requested list of Modular Label " << path << " can not be found " << endl ; 
