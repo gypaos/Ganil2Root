@@ -65,39 +65,43 @@ bool TTiaraBarrel::Init(GDataParameters *params)
       
 			status = true;
 			fLabelMap[lbl]	 = label;
-			if (label.compare(4,1,"I") == 0) {             // inner barrel
+			
+      // inner barrel
+      if (label.compare(4,1,"I") == 0) {             
             if (label.compare(13,1,"U") == 0) {
                fTypeMap[lbl] = IBAR_UP_STRIP_E;
                // barrel number
-               barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
+               barrel = atoi(label.substr(10,1).c_str());     
                // strip number
-               channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
+               channum = atoi(label.substr(12,1).c_str());     
                fParameterMap[lbl] = (barrel-1)*4 + channum-1; 
             } 
             else if (label.compare(13,1,"D") == 0) {
                fTypeMap[lbl] = IBAR_DO_STRIP_E;
                // barrel number
-               barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
+               barrel = atoi(label.substr(10,1).c_str());      
                // strip number
-               channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
+               channum = atoi(label.substr(12,1).c_str());     
                fParameterMap[lbl] = (barrel-1)*4 + channum-1; 
             }
             else if (label.compare(11,3,"BCK") == 0) {
                fTypeMap[lbl] = IBAR_BACK_E;
-               channum = atoi(label.substr(10,1).c_str());     // barrel number 0 - 7
+               channum = atoi(label.substr(10,1).c_str());     
                fParameterMap[lbl] = channum; 
             }
          }
+        
+         // outter barrel
          else if (label.compare(4,1,"O") == 0) {
             fTypeMap[lbl] = OBAR_E;
             // barrel number
-            barrel = atoi(label.substr(10,1).c_str());      // barrel number 0 - 7
+            barrel = atoi(label.substr(10,1).c_str());      
             // strip number
-            channum = atoi(label.substr(12,1).c_str());     // strip number 0 - 3
+            channum = atoi(label.substr(12,1).c_str());     
             fParameterMap[lbl] = (barrel-1)*4 + channum-1; 
          }
-         else 
-         {
+         
+         else{
             cout << "TTiaraBarrel::Init() : problem reading Tiara/Barrel label -> " << label << endl;
             status = false;
          }

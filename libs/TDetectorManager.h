@@ -1,5 +1,5 @@
-#ifndef __DETECTOR__
-#define __DETECTOR__
+#ifndef _TDETECTORMANAGER_
+#define _TDETECTORMANAGER_
 /*****************************************************************************
  * Copyright (C) 2008   this file is part of the Ganil2Root Project          *
  *                                                                           *
@@ -23,43 +23,37 @@
  *     (this should be changed in the future)                                *
  *                                                                           *
  *****************************************************************************/
-// GRU headers
-#include "GDataParameters.h"
-
-// ROOT headers
-#include "TObject.h"
-#include "TTree.h"
-
-// C++ headers
-#include <string>
-#include <map>
+// STL
+#include<map>
+#include<string>
 using namespace std;
 
+// ROOT
+#include"TTree.h"
 
-class TDetector : public TObject 
-{
- public:
-	TDetector();
-	virtual ~TDetector();
+// GANIL2ROOT
+#include"TDetector.h"
 
-	virtual bool Init(GDataParameters*)        = 0;
-	virtual bool Clear()                       = 0;
- 	virtual bool Is(UShort_t, Short_t)         = 0; 
-	virtual bool Treat()                       = 0;
-	virtual void InitBranch(TTree*)            = 0;
+//GRU
+#include "GDataParameters.h"
 
-   void Clear(const Option_t*) {};
+namespace G2R{
+  class TDetectorManager{
+    public:
+      TDetectorManager();
+      ~TDetectorManager();
 
- public:
-	string GetLabelMap(int i)	{return fLabelMap[i];}
-   void   DumpLabelMap();
+    private:
+      map<string,TDetector*> fDetectorMap;
 
- protected:
-	map<int, string> fLabelMap;
-	map<int, int>	  fTypeMap;
-	map<int, int>	  fParameterMap;
-
-	ClassDef(TDetector,1)  // Detector abstract class
-};
-
+    public:
+      TDetector* GetDetector(string);
+      void AddDetector(string);
+      bool Init(GDataParameters*);
+      bool Clear();
+      bool Is(UShort_t,Short_t);
+      bool Treat();
+      void InitBranch(TTree*);
+  };
+}
 #endif

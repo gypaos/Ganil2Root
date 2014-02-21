@@ -47,7 +47,7 @@ bool TMust2::Clear()
 }
 
 bool TMust2::Init(GDataParameters *params)
-{
+{ 
 	Int_t channum;
 	Int_t nbParams = params->GetNbParameters();
 	bool status = false;

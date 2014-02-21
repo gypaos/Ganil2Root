@@ -187,7 +187,7 @@ libG2rChateauCristal.so: TChateauCristal.o   TChateauCristalDict.o
 TChateauCristalDict.cxx: TChateauCristal.h
 	rootcint -f $@ -c $(INCLUDE_PERSO) $(INCLUDE_GRU) $^
 
-libG2rDetector.so:   TDetector.o   TDetectorDict.o
+libG2rDetector.so:   TDetector.o   TDetectorDict.o TDetectorManager.o
 	$(LD) $(SOFLAGS) $^ $(OutPutOpt) $@
 
 TDetectorDict.cxx:   TDetector.h
@@ -207,6 +207,7 @@ distclean:
 	$(CXX) $(CXXFLAGS) $(INCLUDE_PERSO) $(INCLUDE_GRU) -c $<
 
 # dependances
+TDetectorManager.o: TDetectorManager.cxx TDetectorManager.h TDetector.o
 TDetector.o:   TDetector.cxx  TDetector.h
 TMust2.o:   TMust2.cxx  TMust2.h
 TCharissa.o:   TCharissa.cxx  TCharissa.h

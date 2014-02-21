@@ -53,14 +53,14 @@ void TModularLabel::LoadLabel(string path){
 
   string DataBuffer;
   while(file>>DataBuffer){
-    fRequestedLabel.insert(DataBuffer); 
+    fRequestedLabel.insert(DataBuffer);
   }
 
 }
 
 ////////////////////////////////////////////////////
 bool TModularLabel::Init(GDataParameters *params){
-  if(fFollowedLabel.size()==0){
+  if(fRequestedLabel.size()==0){
     cout << "WARNING : List of Modular label is empty" << endl; 
   }
 
@@ -94,9 +94,6 @@ bool TModularLabel::Is(UShort_t lbl, Short_t val){
     fMapOfLabelValue[lbl] = val;
     result=true;
   }
-  // if found assigned val to the map entry
-
-
   return result;
 }
 
