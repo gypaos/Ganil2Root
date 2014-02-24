@@ -8,9 +8,10 @@ OBJS = $(patsubst *.cxx,*.o,$(SRCS))
 
 #------------------------------------------------------------------------------
 SHARELIB      = libG2rDetector.so \
-      		    libG2rMust2.so \
-                libG2rCharissa.so \
-                libG2rTiaraBarrel.so   libG2rTiaraHyball.so \
+      		    libG2rModularLabel.so \
+							libG2rMust2.so \
+              libG2rCharissa.so \
+              libG2rTiaraBarrel.so   libG2rTiaraHyball.so \
       		    libG2rCATS.so \
       		    libG2rSSSD.so \
       		    libG2rPlastic.so \
@@ -23,13 +24,18 @@ SHARELIB      = libG2rDetector.so \
       		    libG2rLiseData.so libG2rLise.so \
       		    libG2rTac.so \
       		    libG2rTrigger.so \
-                libG2rMaya.so \
-                libG2rChateauCristal.so \
-         		 libG2rExl.so \
+              libG2rMaya.so \
+              libG2rChateauCristal.so \
+         		  libG2rExl.so \
 		          libG2rSpegDC.so	libG2rSpegCHIO.so	libG2rSpegPlastic.so
 
 all:            $(SHARELIB)
 #------------------------------------------------------------------------------
+libG2rModularLabel.so:   TModularLabel.o   TModularLabelDict.o
+	$(LD) $(SOFLAGS) $^ $(OutPutOpt) $@
+
+TModularLabelDict.cxx:   TModularLabel.h
+	rootcint -f $@ -c $(INCLUDE_PERSO) $(INCLUDE_GRU) $^ 
 
 libG2rMust2.so:   TMust2.o   TMust2Dict.o
 	$(LD) $(SOFLAGS) $^ $(OutPutOpt) $@
