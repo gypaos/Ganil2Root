@@ -41,6 +41,7 @@
 #define CHA_E_Y_E	7
 #define CHA_E_Y_T	8
 #define CHA_CSI_E	      9
+//#define ECsI	        9
 #define CHA_CSI_T       10
 
 class TCharissa : public TDetector 

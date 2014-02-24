@@ -109,9 +109,6 @@ bool TTiaraHyball::Is(UShort_t lbl, Short_t val)
 			fTiaraHyballData->SetRingEDetectorNbr(fParameterMap[lbl] / 16+1);
 			fTiaraHyballData->SetRingEStripNbr(fParameterMap[lbl] % 16+1);
 			fTiaraHyballData->SetRingEEnergy(val);
-			fTiaraHyballData->SetRingTDetectorNbr(fParameterMap[lbl] / 16+1);
-			fTiaraHyballData->SetRingTStripNbr(fParameterMap[lbl] % 16+1);
-			fTiaraHyballData->SetRingTTime(0);
 			result = true;
 			break;
 		}
@@ -122,9 +119,6 @@ bool TTiaraHyball::Is(UShort_t lbl, Short_t val)
 			fTiaraHyballData->SetSectorEDetectorNbr(fParameterMap[lbl] / 8+1);
 			fTiaraHyballData->SetSectorEStripNbr(fParameterMap[lbl] % 8+1);
 			fTiaraHyballData->SetSectorEEnergy(val);
-			fTiaraHyballData->SetSectorTDetectorNbr(fParameterMap[lbl] / 8+1);
-			fTiaraHyballData->SetSectorTStripNbr(fParameterMap[lbl] % 8+1);
-			fTiaraHyballData->SetSectorTTime(0);
 			result = true;
 			break;
 		}
