@@ -73,7 +73,7 @@ bool TModularLabel::Init(GDataParameters *params){
     string label   = params->GetParName(index);
     // Check if label is in the list of Requested Label
     if(fRequestedLabel.find(label)!=fRequestedLabel.end()){
-      fFollowedLabel.insert(label);
+      fFollowedLabel[label]=lbl;
       fMapOfLabelValue[lbl]=-1000;
     }
   } 
@@ -104,15 +104,14 @@ bool TModularLabel::Treat(){
 
 ////////////////////////////////////////////////////
 void TModularLabel::InitBranch(TTree *tree){
-  set<string>::iterator it; 
-  map<UShort_t,Short_t>::iterator it2 ;
+  map<string,UShort_t>::iterator it; 
 
   // Sync loop over set and map
-  for(it=fFollowedLabel.begin(), it2=fMapOfLabelValue.begin(); it!=fFollowedLabel.end() || it2!=fMapOfLabelValue.end(); it++,it2++){
-    string BranchName = (*it);
+  for(it=fFollowedLabel.begin(); it!=fFollowedLabel.end(); it++){
+    string BranchName = it->first;
     string VariableName = BranchName+"/S";
 
-    tree->Branch(BranchName.c_str(), &it2->second);
+    tree->Branch(BranchName.c_str(), &fMapOfLabelValue[it->second]);
   }
 }
 
@@ -122,12 +121,6 @@ Short_t TModularLabel::GetValue(string label){
   map<UShort_t,Short_t>::iterator it2 ;
 
   // Sync loop over set and map
-  for(it=fFollowedLabel.begin(), it2=fMapOfLabelValue.begin(); it!=fFollowedLabel.end() || it2!=fMapOfLabelValue.end(); it++,it2++){
-    if(*it == label )
-      return it2->second;
-  }
-
-return -1000;
-
+  return fMapOfLabelValue[fFollowedLabel[label]];
 }
 

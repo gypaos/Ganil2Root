@@ -52,7 +52,7 @@ class TModularLabel : public TDetector {
     // Label ask to be followed by the user
     set<string>           fRequestedLabel;
     // Label found in the list
-    set<string>           fFollowedLabel;
+    map<string,UShort_t>           fFollowedLabel;
     // Map of Numeric label and associate Value
     map<UShort_t,Short_t> fMapOfLabelValue; 
   
@@ -60,7 +60,7 @@ class TModularLabel : public TDetector {
     // Read the user input file to find which label to follow
     void LoadLabel(string path);
     inline map<UShort_t,Short_t>  GetMapOfLabelValue()    {return fMapOfLabelValue;} 
-	  inline set<string>            GetFollowedLabel()      {return fFollowedLabel;}
+	  inline map<string,UShort_t>            GetFollowedLabel()      {return fFollowedLabel;}
     Short_t GetValue(string label);
   
   ClassDef(TModularLabel,1)  // MUST2 detector structure
