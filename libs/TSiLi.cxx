@@ -63,17 +63,17 @@ bool TSiLi::Init(GDataParameters *params)
 		string label = params->GetParName(index);
 		// cout << index << "  " << lbl << "  " << label <<  endl;
        
-		if (label.compare(0,5,"SILI") == 0 ) 
+		if (label.compare(0,4,"SILI") == 0 ) 
 		{  
 			fLabelMap[lbl] = label;
 			status = true;
 
-			if (label.compare(5,2,"_E") == 0 ) 
+			if (label.compare(4,2,"_E") == 0 ) 
 			{
 				// cout << fTypeMap[lbl] << endl;
 				fTypeMap[lbl] = SILI_E;
 			} 
-			else if (label.compare(5,2,"_T") == 0) 
+			else if (label.compare(4,2,"_T") == 0) 
          {
 				fTypeMap[lbl] = SILI_T;
          }
@@ -100,7 +100,7 @@ bool TSiLi::Is(UShort_t lbl, Short_t val)
 		case SILI_E :
 		{  
 			//cout<<  "- ---------< SiLi E >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(7,1).c_str());
+			det = atoi(fLabelMap[lbl].substr(6,1).c_str());
          fSiLiData->SetENumber(det);
 			fSiLiData->SetEEnergy(val);
 			status = true;
@@ -110,7 +110,7 @@ bool TSiLi::Is(UShort_t lbl, Short_t val)
 		case SILI_T :
 		{  
 			//cout<<  "- ---------< SiLi E >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(7,1).c_str());
+			det = atoi(fLabelMap[lbl].substr(6,1).c_str());
 			fSiLiData->SetTNumber(det);
 			fSiLiData->SetTTime(val);
 			status = true;
