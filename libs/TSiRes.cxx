@@ -20,39 +20,39 @@
  *    + march 2011: Add support for TPlasticPhysics from NPTool              *
  *                                                                           *
  *****************************************************************************/
-#include "TSiLi.h"
+#include "TSiRes.h"
 
 #include <string>
 #include <cstdlib>
 using namespace std;
 
 
-ClassImp(TSiLi)
+ClassImp(TSiRes)
 
-TSiLi::TSiLi()
+TSiRes::TSiRes()
 {
 	// Default constructor
-	fSiLiData    = new TSiLiData();
+	fSiResData    = new TSiResData();
 }
 
 
 
-TSiLi::~TSiLi()
+TSiRes::~TSiRes()
 {
-	delete fSiLiData;
+	delete fSiResData;
 }
 
 
 
-bool TSiLi::Clear()
+bool TSiRes::Clear()
 {
-	fSiLiData->Clear();
+	fSiResData->Clear();
 	return true;
 }
 
 
 
-bool TSiLi::Init(GDataParameters *params)
+bool TSiRes::Init(GDataParameters *params)
 {
 	bool status = false;
 
@@ -63,23 +63,24 @@ bool TSiLi::Init(GDataParameters *params)
 		string label = params->GetParName(index);
 		// cout << index << "  " << lbl << "  " << label <<  endl;
        
-		if (label.compare(0,4,"SILI") == 0 ) 
+		if (label.compare(0,5,"SIRES") == 0 ) 
 		{  
 			fLabelMap[lbl] = label;
 			status = true;
 
-			if (label.compare(4,2,"_E") == 0 ) 
+			if (label.compare(5,2,"_E") == 0 ) 
 			{
 				// cout << fTypeMap[lbl] << endl;
-				fTypeMap[lbl] = SILI_E;
+				if(label.compare(7,4,"BACK") == 0 ) fTypeMap[lbl] = SIRES_EBACK;
+				else fTypeMap[lbl] = SIRES_E;
 			} 
-			else if (label.compare(4,2,"_T") == 0) 
-         {
-				fTypeMap[lbl] = SILI_T;
-         }
-         else
+		else if (label.compare(5,2,"_T") == 0) 
+         		{
+				fTypeMap[lbl] = SIRES_T;
+         		}
+         		else
 			{
-				cout << "TSiLi::Init() : problem reading SiLi's label -> " << label << endl;
+				cout << "TSiRes::Init() : problem reading SiRes's label -> " << label << endl;
 				status = false;
 			}
 		}
@@ -90,36 +91,44 @@ bool TSiLi::Init(GDataParameters *params)
 
 
 
-bool TSiLi::Is(UShort_t lbl, Short_t val)
+bool TSiRes::Is(UShort_t lbl, Short_t val)
 {
-   int det;
+   	int det,cha;
 	bool status = false;
 
 	switch (fTypeMap[lbl]) 
 	{
-		case SILI_E :
+		case SIRES_E :
 		{  
-			//cout<<  "- ---------< SiLi E >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(6,1).c_str());
-         fSiLiData->SetENumber(det);
-			fSiLiData->SetEEnergy(val);
+			//cout<<  "- ---------< SiRes E >------------------!\n"
+			cha = atoi(fLabelMap[lbl].substr(8,1).c_str());
+         		fSiResData->SetEChannel(cha);
+			fSiResData->SetEEnergy(val);
 			status = true;
 			break;
 		}
     
-		case SILI_T :
+		case SIRES_EBACK :
 		{  
-			//cout<<  "- ---------< SiLi E >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(6,1).c_str());
-			fSiLiData->SetTNumber(det);
-			fSiLiData->SetTTime(val);
+			//cout<<  "- ---------< SiRes EBack >------------------!\n";
+			//det = atoi(fLabelMap[lbl].substr(6,1).c_str());
+ 			fSiResData->SetEEnergyBack(val);
+			status = true;
+			break;
+		}
+		
+		case SIRES_T :
+		{  
+			//cout<<  "- ---------< SiRes E >------------------!\n";
+			//det = atoi(fLabelMap[lbl].substr(6,1).c_str());
+			fSiResData->SetTTime(val);
 			status = true;
 			break;
 		}
     
 		default:
 		{
-			//cout<<"TSiLi::Is --> not a good label"<<endl;
+			//cout<<"TSiRes::Is --> not a good label"<<endl;
 			status = false;
 		}
 	} // end of switch
@@ -129,15 +138,15 @@ bool TSiLi::Is(UShort_t lbl, Short_t val)
 
 
 
-bool TSiLi::Treat()
+bool TSiRes::Treat()
 { 
    return true;
 }
 
 
 
-void TSiLi::InitBranch(TTree *tree)
+void TSiRes::InitBranch(TTree *tree)
 {
-	tree->Branch("SILI", "TSiLiData", &fSiLiData);
+	tree->Branch("SiRes", "TSiResData", &fSiResData);
 }
 

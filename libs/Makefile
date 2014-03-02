@@ -17,6 +17,7 @@ SHARELIB      = libG2rDetector.so \
       		    libG2rPlastic.so \
 	libG2rLaBr3.so \
 	libG2rSiLi.so \
+	libG2rSiRes.so \
       		    libG2rChio_an.so \
       		    libG2rChio_dig.so \
 		          libG2rS1.so \
@@ -94,6 +95,12 @@ TSiLiDict.cxx: TSiLi.h
 	rootcint -f $@ -c $(INCLUDE_PERSO) $(INCLUDE_GRU) $^
 
 libG2rSiLi.so: TSiLi.o   TSiLiDict.o
+	$(LD) $(SOFLAGS) $^ $(OutPutOpt) $@
+
+TSiResDict.cxx: TSiRes.h
+	rootcint -f $@ -c $(INCLUDE_PERSO) $(INCLUDE_GRU) $^
+
+libG2rSiRes.so: TSiRes.o   TSiResDict.o
 	$(LD) $(SOFLAGS) $^ $(OutPutOpt) $@
 
 TPlasticDict.cxx: TPlastic.h
@@ -232,6 +239,7 @@ TSSSD.o: TSSSD.cxx   TSSSD.h
 TPlastic.o: TPlastic.cxx   TPlastic.h
 TLaBr3.o: TLaBr3.cxx   TLaBr3.h
 TSiLi.o: TSiLi.cxx   TSiLi.h
+TSiRes.o: TSiRes.cxx   TSiRes.h
 TVamosPlastic.o:        TVamosPlastic.cxx       TVamosPlastic.h
 TVamosFinger.o:         TVamosFinger.cxx        TVamosFinger.h
 TVamosCHIO.o:           TVamosCHIO.cxx          TVamosCHIO.h
