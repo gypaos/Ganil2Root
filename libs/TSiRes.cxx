@@ -102,7 +102,7 @@ bool TSiRes::Is(UShort_t lbl, Short_t val)
 		{  
 			//cout<<  "- ---------< SiRes E >------------------!\n"
 			cha = atoi(fLabelMap[lbl].substr(8,1).c_str());
-         		fSiResData->SetEChannel(cha);
+         		fSiResData->SetEChannelNumber(cha);
 			fSiResData->SetEEnergy(val);
 			status = true;
 			break;
