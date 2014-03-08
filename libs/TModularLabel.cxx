@@ -55,7 +55,6 @@ void TModularLabel::LoadLabel(string path){
   while(file>>DataBuffer){
     fRequestedLabel.insert(DataBuffer);
   }
-
 }
 
 ////////////////////////////////////////////////////
@@ -76,8 +75,8 @@ bool TModularLabel::Init(GDataParameters *params){
       fFollowedLabel[label]=lbl;
       fMapOfLabelValue[lbl]=-1000;
     }
-  } 
-
+  }
+ 
   if(fFollowedLabel.size()!=fMapOfLabelValue.size()){
     cout << "ERROR : List of followed label differ from the Map of label" << endl ;
     exit(1); 
@@ -105,21 +104,16 @@ bool TModularLabel::Treat(){
 ////////////////////////////////////////////////////
 void TModularLabel::InitBranch(TTree *tree){
   map<string,UShort_t>::iterator it; 
-
   // Sync loop over set and map
   for(it=fFollowedLabel.begin(); it!=fFollowedLabel.end(); it++){
     string BranchName = it->first;
     string VariableName = BranchName+"/S";
-
     tree->Branch(BranchName.c_str(), &fMapOfLabelValue[it->second]);
   }
 }
 
 ////////////////////////////////////////////////////
 Short_t TModularLabel::GetValue(string label){
-  set<string>::iterator it;
-  map<UShort_t,Short_t>::iterator it2 ;
-
   // Sync loop over set and map
   return fMapOfLabelValue[fFollowedLabel[label]];
 }
