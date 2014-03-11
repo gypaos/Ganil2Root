@@ -24,15 +24,15 @@
  *                                                                           *
  *****************************************************************************/
 // STL
-#include<map>
-#include<string>
+#include <map>
+#include <string>
 using namespace std;
 
 // ROOT
-#include"TTree.h"
+#include "TTree.h"
 
 // GANIL2ROOT
-#include"TDetector.h"
+#include "TDetector.h"
 
 //GRU
 #include "GDataParameters.h"
