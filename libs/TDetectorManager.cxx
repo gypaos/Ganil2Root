@@ -6,6 +6,9 @@
 #include "TTrigger.h" 
 #include "TTac.h" 
 #include "TPlastic.h" 
+#include "TSiLi.h" 
+#include "TSiRes.h" 
+#include "TLaBr3.h" 
 #include "TLise.h" 
 #include "TTiaraHyball.h" 
 #include "TTiaraBarrel.h"  
@@ -85,6 +88,18 @@ void TDetectorManager::AddDetector(string DetectorName){
   else if(DetectorName=="Plastic"){
     TDetector* det = new TPlastic();
     fDetectorMap["Plastic"] = det;
+  }
+  else if(DetectorName=="SiLi"){
+    TDetector* det = new TSiLi();
+    fDetectorMap["SiLi"] = det;
+  }
+  else if(DetectorName=="SiRes"){
+    TDetector* det = new TSiRes();
+    fDetectorMap["SiRes"] = det;
+  }
+  else if(DetectorName=="LaBr3"){
+    TDetector* det = new TLaBr3();
+    fDetectorMap["LaBr3"] = det;
   }
   else if(DetectorName=="Lise"){
     TDetector* det = new TLise();
