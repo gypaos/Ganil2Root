@@ -100,9 +100,10 @@ bool TSiRes::Is(UShort_t lbl, Short_t val)
 	{
 		case SIRES_E :
 		{  
-			//cout<<  "- ---------< SiRes E >------------------!\n"
+			//cout<<  "- ---------< SiRes E >------------------!\n";
 			cha = atoi(fLabelMap[lbl].substr(8,1).c_str());
          		fSiResData->SetEChannelNumber(cha);
+         		fSiResData->SetEDetectorNumber(1);
 			fSiResData->SetEEnergy(val);
 			status = true;
 			break;
@@ -113,6 +114,7 @@ bool TSiRes::Is(UShort_t lbl, Short_t val)
 			//cout<<  "- ---------< SiRes EBack >------------------!\n";
 			//det = atoi(fLabelMap[lbl].substr(6,1).c_str());
  			fSiResData->SetEEnergyBack(val);
+         		fSiResData->SetEEnergyBackDetectorNumber(1);
 			status = true;
 			break;
 		}
@@ -121,6 +123,7 @@ bool TSiRes::Is(UShort_t lbl, Short_t val)
 		{  
 			//cout<<  "- ---------< SiRes E >------------------!\n";
 			//det = atoi(fLabelMap[lbl].substr(6,1).c_str());
+			fSiResData->SetTDetectorNumber(1);
 			fSiResData->SetTTime(val);
 			status = true;
 			break;
