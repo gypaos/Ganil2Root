@@ -100,7 +100,7 @@ bool TLaBr3::Is(UShort_t lbl, Short_t val)
 		case LABR3_E :
 		{  
 			//cout<<  "- ---------< LaBr3 E >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(7,1).c_str());
+			det = atoi(fLabelMap[lbl].substr(8,1).c_str());
          fLaBr3Data->SetENumber(det);
 			fLaBr3Data->SetEEnergy(val);
 			status = true;
@@ -110,7 +110,7 @@ bool TLaBr3::Is(UShort_t lbl, Short_t val)
 		case LABR3_T :
 		{  
 			//cout<<  "- ---------< LaBr3 E >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(7,1).c_str());
+			det = atoi(fLabelMap[lbl].substr(8,1).c_str());
 			fLaBr3Data->SetTNumber(det);
 			fLaBr3Data->SetTTime(val);
 			status = true;

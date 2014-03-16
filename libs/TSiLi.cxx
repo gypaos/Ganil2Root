@@ -92,7 +92,7 @@ bool TSiLi::Init(GDataParameters *params)
 
 bool TSiLi::Is(UShort_t lbl, Short_t val)
 {
-   int det;
+   	int det;
 	bool status = false;
 
 	switch (fTypeMap[lbl]) 
@@ -100,8 +100,7 @@ bool TSiLi::Is(UShort_t lbl, Short_t val)
 		case SILI_E :
 		{  
 			//cout<<  "- ---------< SiLi E >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(6,1).c_str());
-         fSiLiData->SetENumber(det);
+			det = atoi(fLabelMap[lbl].substr(7,1).c_str());         		fSiLiData->SetENumber(det);
 			fSiLiData->SetEEnergy(val);
 			status = true;
 			break;
@@ -110,7 +109,7 @@ bool TSiLi::Is(UShort_t lbl, Short_t val)
 		case SILI_T :
 		{  
 			//cout<<  "- ---------< SiLi E >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(6,1).c_str());
+			det = atoi(fLabelMap[lbl].substr(7,1).c_str());
 			fSiLiData->SetTNumber(det);
 			fSiLiData->SetTTime(val);
 			status = true;
