@@ -4,7 +4,6 @@
 #include "TCATS.h"
 #include "TExogam.h"  
 #include "TTrigger.h" 
-#include "TTac.h" 
 #include "TPlastic.h" 
 #include "TSiLi.h" 
 #include "TSiRes.h" 
@@ -81,10 +80,6 @@ void TDetectorManager::AddDetector(string DetectorName)
   else if(DetectorName=="TiaraHyball"){
     TDetector* det = new TTiaraHyball();
     fDetectorMap["TiaraHyball"] = det;
-  }
-  else if(DetectorName=="TAC"){
-    TDetector* det = new TTac();
-    fDetectorMap["TAC"] = det;
   }
   else if(DetectorName=="Trigger"){
     TDetector* det = new TTrigger();
