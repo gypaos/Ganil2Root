@@ -1,3 +1,5 @@
+#ifndef __VAMOSCHIO__
+#define __VAMOSCHIO__
 /*****************************************************************************
  * Copyright (C) 2008   this file is part of the Ganil2Root Project          *
  *                                                                           *
@@ -19,9 +21,6 @@
  * Comment:                                                                  *
  *                                                                           *
  *****************************************************************************/
-#ifndef __VAMOSCHIO__
-#define __VAMOSCHIO__
-
 #ifndef __DETECTOR__
 #include "TDetector.h"
 #endif
@@ -33,11 +32,9 @@
 #include "GDataParameters.h"
 #include "TTree.h"
 
-
-#define A	1
-#define B	2
-#define C	3
-
+#define VAMOS_A	1
+#define VAMOS_B	2
+#define VAMOS_C	3
 
 class TVamosCHIO : public TDetector {
   public:
@@ -57,7 +54,7 @@ class TVamosCHIO : public TDetector {
    TVamosCHIOData*	GetVamosCHIOData() const {return fVamosCHIOData;}
 
   private:
-   // Data class for Must2
+   // Data class
    TVamosCHIOData  *fVamosCHIOData;
 
    ClassDef(TVamosCHIO,1)  // VamosCHIO detector structure

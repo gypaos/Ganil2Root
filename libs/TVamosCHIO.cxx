@@ -68,19 +68,19 @@ bool TVamosCHIO::Init(GDataParameters *params)
 	 status = true;
 
 	 if (label.compare(5,1,"A") == 0 ) {
-	     fTypeMap[lbl] = A;
+	     fTypeMap[lbl] = VAMOS_A;
 	     channum = atoi(label.substr(7).c_str());
 	     fParameterMap[lbl] = channum;                 // CHIO A signals 1-7
 	       //	    cout << fTypeMap[lbl] << "  " << fParameterMap[lbl] << endl;
 	  } 
 	  else if (label.compare(5,1,"B") == 0 ) {
-	     fTypeMap[lbl] = B;
+	     fTypeMap[lbl] = VAMOS_B;
 	     channum = atoi(label.substr(7).c_str());
 	     fParameterMap[lbl] = channum;                 // CHIO B signals 1-7
 	       //	    cout << fTypeMap[lbl] << "  " << fParameterMap[lbl] << endl;
 	  }
 	  else if (label.compare(5,1,"C") == 0 ) {
-	     fTypeMap[lbl] = C;
+	     fTypeMap[lbl] = VAMOS_C;
 	     channum = atoi(label.substr(7).c_str());
 	     fParameterMap[lbl] = channum;                 // CHIO C signals 1-7
 	       //	    cout << fTypeMap[lbl] << "  " << fParameterMap[lbl] << endl;
@@ -103,7 +103,7 @@ bool TVamosCHIO::Is(UShort_t lbl, Short_t val)
 
   switch (fTypeMap[lbl]) {
     
-    case A :{  
+    case VAMOS_A :{  
       //cout<<  "- ---------< CHIO A >------------------!\n";
       fVamosCHIOData->SetVamosCHIOPadNbrA(fParameterMap[lbl]);
       fVamosCHIOData->SetVamosCHIOEnergyA(val);
@@ -111,7 +111,7 @@ bool TVamosCHIO::Is(UShort_t lbl, Short_t val)
       break;
     }
     
-    case B :{  
+    case VAMOS_B :{  
       //cout<<  "- ---------< CHIO B >------------------!\n";
       fVamosCHIOData->SetVamosCHIOPadNbrB(fParameterMap[lbl]);
       fVamosCHIOData->SetVamosCHIOEnergyB(val);
@@ -119,7 +119,7 @@ bool TVamosCHIO::Is(UShort_t lbl, Short_t val)
       break;
     }
 
-    case C :{  
+    case VAMOS_C :{  
       //cout<<  "- ---------< CHIO C >------------------!\n";
       fVamosCHIOData->SetVamosCHIOPadNbrC(fParameterMap[lbl]);
       fVamosCHIOData->SetVamosCHIOEnergyC(val);
