@@ -25,7 +25,6 @@ SHARELIB      = libG2rDetector.so \
 		          libG2rVamosCHIO.so		libG2rVamosDC.so \
 		          libG2rExogam.so \
       		    libG2rLiseData.so libG2rLise.so \
-      		    libG2rTac.so \
       		    libG2rTrigger.so \
               libG2rMaya.so \
               libG2rChateauCristal.so \
@@ -160,12 +159,6 @@ libG2rChio_dig.so:   TChio_dig.o   TChio_digDict.o
 TChio_digDict.cxx:   TChio_dig.h
 	rootcint -f $@ -c $(INCLUDE_PERSO) $(INCLUDE_GRU) $^
 
-libG2rTac.so:  TTac.o   TTacDict.o
-	$(LD) $(SOFLAGS) $^ $(OutPutOpt) $@
-
-TTacDict.cxx:  TTac.h
-	rootcint -f $@ -c $(INCLUDE_PERSO) $(INCLUDE_GRU) $^
-
 libG2rTrigger.so: TTrigger.o   TTriggerDict.o
 	$(LD) $(SOFLAGS) $^ $(OutPutOpt) $@
 
@@ -246,7 +239,6 @@ TVamosCHIO.o:           TVamosCHIO.cxx          TVamosCHIO.h
 TVamosDC.o:     TVamosDC.cxx            TVamosDC.h
 TChio_an.o: TChio_an.cxx   TChio_an.h
 TChio_dig.o:   TChio_dig.cxx  TChio_dig.h
-TTac.o:     TTac.cxx TTac.h
 TTrigger.o: TTrigger.cxx      TTrigger.h
 TLiseData.o:   TLiseData.cxx  TLiseData.h
 TLise.o:       TLise.cxx      TLise.h
