@@ -1,5 +1,3 @@
-#ifndef _TDETECTORMANAGER_
-#define _TDETECTORMANAGER_
 /*****************************************************************************
  * Copyright (C) 2008   this file is part of the Ganil2Root Project          *
  *                                                                           *
@@ -12,48 +10,58 @@
  *                  J. Burgunder                    burgunder@ganil.in2p3.fr *
  *                                                                           *
  * Creation Date  : May 2009                                                 *
- * Last update    :                                                          *
+ * Last update    : March 2011                                               *
  *---------------------------------------------------------------------------*
- * Decription: Abstract Base Class for all detectors                         *
+ * Decription: This class is in charged of converting raw data from GANIL    *
+ *             format to a ROOT format for the plastic detector              *
  *                                                                           *
  *---------------------------------------------------------------------------*
  * Comment:                                                                  *
- *   + This class holds the maps which are used in the daughter classes      *
- *   + The absolute path for GDataParameters.h should be given explicitely   *
- *     (this should be changed in the future)                                *
+ *    + march 2011: Add support for TPlasticPhysics from NPTool              *
  *                                                                           *
  *****************************************************************************/
-// STL
-#include <map>
-#include <string>
-using namespace std;
+#ifndef __SiLi__
+#define __SiLi__
 
-// ROOT
+#ifndef __DETECTOR__
+#include "TDetector.h"
+#endif
+
+#ifndef __SiLiDATA__
+#include "TSiLiData.h"
+#endif
+
+#include "GDataParameters.h"
 #include "TTree.h"
 
-// GANIL2ROOT
-#include "TDetector.h"
+#define	SILI_E	1
+#define	SILI_T	2
 
-//GRU
-#include "GDataParameters.h"
+class TSiLi : public TDetector 
+{
+ 
+ public:
+	TSiLi();
+	virtual ~TSiLi();
 
-namespace G2R{
-  class TDetectorManager{
-    public:
-      TDetectorManager();
-      ~TDetectorManager();
+	// virtual methods from TDetector
+	virtual bool Init(GDataParameters*);
+	virtual bool Clear();
+	virtual bool Is(UShort_t, Short_t);
+	virtual bool Treat();
+	virtual void InitBranch(TTree*);
 
-    private:
-      map<string,TDetector*> fDetectorMap;
+   void Clear(const Option_t*) {};
 
-    public:
-      TDetector* GetDetector(string);
-      void AddDetector(string);
-      bool Init(GDataParameters*);
-      bool Clear();
-      bool Is(UShort_t,Short_t);
-      bool Treat();
-      void InitBranch(TTree*);
-  };
-}
+	// getters and setters
+	TSiLiData*    GetSiLiData() const {return fSiLiData;}
+	
+ private:
+
+	// Data class for SiLi
+	TSiLiData  *fSiLiData;
+
+	ClassDef(TSiLi,1)  // SiLi detector structure
+};
+
 #endif

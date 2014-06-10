@@ -1,4 +1,4 @@
-#include"TDetectorManager.h"
+#include "TDetectorManager.h"
 #include "TModularLabel.h"
 #include "TMust2.h"  
 #include "TCATS.h"
@@ -6,44 +6,52 @@
 #include "TTrigger.h" 
 #include "TTac.h" 
 #include "TPlastic.h" 
+#include "TSiLi.h" 
+#include "TSiRes.h" 
+#include "TLaBr3.h" 
 #include "TLise.h" 
 #include "TTiaraHyball.h" 
 #include "TTiaraBarrel.h"  
 #include "TCharissa.h" 
 using namespace G2R;
 
-#include<cstdlib>
+#include <cstdlib>
+using namespace std;
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 TDetectorManager::TDetectorManager(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-TDetectorManager::~TDetectorManager(){
-
+TDetectorManager::~TDetectorManager()
+{
   map<string,TDetector*>::iterator it;
 
-  for(it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++){  
+  for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {  
     delete it->second;
   }
 
   fDetectorMap.clear();
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-TDetector* TDetectorManager::GetDetector(string DetectorName){
+TDetector* TDetectorManager::GetDetector(string DetectorName)
+{
   map<string,TDetector*>::iterator det = fDetectorMap.find(DetectorName);
 
-  if(det!=fDetectorMap.end()) return det->second;
-  else{
+  if (det!=fDetectorMap.end()) return det->second;
+  else {
     cout << "ERROR: Detector " << DetectorName 
       << " Does not exist in TDetectorManager " << endl;
     exit(1);
   }
 }
-///////////////////////////////////////////////////////////////////////////////
-void TDetectorManager::AddDetector(string DetectorName){
 
+///////////////////////////////////////////////////////////////////////////////
+void TDetectorManager::AddDetector(string DetectorName)
+{
   if(DetectorName=="ModularLabel"){
     TDetector* det = new TModularLabel();
     fDetectorMap["ModularLabel"] = det;
@@ -86,6 +94,18 @@ void TDetectorManager::AddDetector(string DetectorName){
     TDetector* det = new TPlastic();
     fDetectorMap["Plastic"] = det;
   }
+  else if(DetectorName=="SiLi"){
+    TDetector* det = new TSiLi();
+    fDetectorMap["SiLi"] = det;
+  }
+  else if(DetectorName=="SiRes"){
+    TDetector* det = new TSiRes();
+    fDetectorMap["SiRes"] = det;
+  }
+  else if(DetectorName=="LaBr3"){
+    TDetector* det = new TLaBr3();
+    fDetectorMap["LaBr3"] = det;
+  }
   else if(DetectorName=="Lise"){
     TDetector* det = new TLise();
     fDetectorMap["Lise"] = det;
@@ -94,11 +114,12 @@ void TDetectorManager::AddDetector(string DetectorName){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool TDetectorManager::Init(GDataParameters* g){
+bool TDetectorManager::Init(GDataParameters* g)
+{
   map<string,TDetector*>::iterator it;
   bool result = true;
 
-  for(it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++){
+  for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
     it->second->Init(g);
   }
 
@@ -106,11 +127,12 @@ bool TDetectorManager::Init(GDataParameters* g){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool TDetectorManager::Is(UShort_t label,Short_t value){
+bool TDetectorManager::Is(UShort_t label,Short_t value)
+{
   map<string,TDetector*>::iterator it;
 
-  for(it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++){
-    if(it->second->Is(label,value)){
+  for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
+    if (it->second->Is(label,value)) {
       return true;
     }
   }
@@ -119,11 +141,12 @@ bool TDetectorManager::Is(UShort_t label,Short_t value){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool TDetectorManager::Clear(){
+bool TDetectorManager::Clear()
+{
   map<string,TDetector*>::iterator it;
   bool result = true;
 
-  for(it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++){
+  for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
     result = result && it->second->Clear();
   }
 
@@ -131,10 +154,11 @@ bool TDetectorManager::Clear(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void TDetectorManager::InitBranch(TTree* tree){
+void TDetectorManager::InitBranch(TTree* tree)
+{
   map<string,TDetector*>::iterator it;
 
-  for(it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++){
+  for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
     it->second->InitBranch(tree);
   }
 }
