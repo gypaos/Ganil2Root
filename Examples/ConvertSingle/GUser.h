@@ -24,15 +24,17 @@
 
 #include <sstream>
 using std::ostream;
-
-#include <TObject.h>
 #include "General.h"
+#include <TObject.h>
 #include "GAcq.h"
 #include "GDevice.h"
+
+#ifndef __MAKECINT__
 // Ganil2Root
 #include "G2RDetectorManager.h"
 // NPTool
 #include "NPDetectorManager.h"
+#endif
 
 //_________________________________________________________________________________________
 
@@ -42,7 +44,7 @@ class GUser : public  GAcq{
 
   public:
     GUser(GDevice* DevIn= NULL, GDevice* DevOut= NULL);// default constructor of GUser object 
-    ~GUser() ; 
+	 ~GUser() ; 
 
     virtual void InitUser();
     virtual void InitUserRun();
@@ -52,11 +54,14 @@ class GUser : public  GAcq{
     virtual void InitTTreeUser(); 
     ClassDef (GUser ,1); // User Treatment of Data
 
+#ifndef __MAKECINT__
   private: // NPTool  
     NPL::DetectorManager* m_NPDetectorManager;
     TTree* m_NPTree;
   private: // Ganil2Root
     G2R::DetectorManager* m_G2RDetectorManager;
+#endif
+
 };
 
 #endif

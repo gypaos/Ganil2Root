@@ -14,13 +14,16 @@ message("  include directory: ${NPLib_INCLUDE_DIRS}")
 message("  detector list (empty if all): ${NPLib_DETECTOR_LIST}")
 
 # Finding GRU 
-message("Looking for GRU: ")
-find_package(GRU)
-include(${GRU_USE_FILE})
-message("  found: ${GRUDIR}")
-message("  include directory: ${GRU_INCLUDE_DIRS}")
-
-
+#message("Looking for GRU: ")
+#find_package(GRU)
+#include(${GRU_USE_FILE})
+#message("  found: ${GRUDIR}")
+#message("  include directory: ${GRU_INCLUDE_DIRS}")
+link_directories( $ENV{GRUDIR}/MFMlib)
+link_directories( $ENV{GRUDIR}/lib)
+# Include directories
+include_directories($ENV{GRUDIR}/include)
+include_directories($ENV{GRUDIR}/MFMlib)
 # include the G2R standard CMake preamble 
 include("ressources/CMake/CMake_Preamble.cmake")
 

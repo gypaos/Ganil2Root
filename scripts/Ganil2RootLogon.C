@@ -38,6 +38,7 @@ void Ganil2RootLogon(bool verbosemode = true){
    // Add include path
    if (verbosemode) cout << "Ganil2Root: adding include path : " << path << endl;
    gROOT->ProcessLine(Form(".include %s/include", path.Data()));
+   gROOT->ProcessLine(Form(".include %s/Core", path.Data()));
 
    // Add shared libraries
    if (verbosemode) cout << "Ganil2Root: loading shared libraries ..." << endl;

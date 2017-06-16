@@ -1,5 +1,5 @@
 # Set usefull variable
-set(G2R "$ENV{G2R}")
+set(G2R "$ENV{GANIL2ROOT}")
 set(G2RLIB "${G2R}/lib")
 set(G2R_INCLUDE_DIR "${G2RLIB}/include")
 set(G2R_LIB_DIR "${G2RLIB}/lib")

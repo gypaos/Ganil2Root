@@ -130,9 +130,8 @@ bool G2R::Must2::Is(UShort_t lbl, Short_t val){
 		case MUST2STR_XE :{  
 			//cout<<  "- ---------< STR X E >------------------!\n";
 			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			fMust2Data->SetMMStripXEDetectorNbr(det);
-			fMust2Data->SetMMStripXEStripNbr(fParameterMap[lbl]);
-			fMust2Data->SetMMStripXEEnergy(val);
+
+			fMust2Data->SetStripXE(det,fParameterMap[lbl],val);
 			result = true;
 			break;
 		}
@@ -140,9 +139,7 @@ bool G2R::Must2::Is(UShort_t lbl, Short_t val){
 		case MUST2STR_XT :{
 			//cout<<  " ----------< STR X T >------------------!\n"; 
 			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			fMust2Data->SetMMStripXTDetectorNbr(det);
-			fMust2Data->SetMMStripXTStripNbr(fParameterMap[lbl]);
-			fMust2Data->SetMMStripXTTime(val);
+			fMust2Data->SetStripXT(det,fParameterMap[lbl],val);
 			result = true;
 			break;
 		}
@@ -150,9 +147,7 @@ bool G2R::Must2::Is(UShort_t lbl, Short_t val){
 		case MUST2STR_YE :{  
 			//cout<<  "- ---------< STR Y E >------------------!\n";
 			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			fMust2Data->SetMMStripYEDetectorNbr(det);
-			fMust2Data->SetMMStripYEStripNbr(fParameterMap[lbl]);
-			fMust2Data->SetMMStripYEEnergy(val);
+			fMust2Data->SetStripYE(det,fParameterMap[lbl],val);
 			result = true;
 			break;
 		}
@@ -160,9 +155,7 @@ bool G2R::Must2::Is(UShort_t lbl, Short_t val){
 		case MUST2STR_YT :{
 			//cout<<  " ----------< STR Y T >------------------!\n"; 
 			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			fMust2Data->SetMMStripYTDetectorNbr(det);
-			fMust2Data->SetMMStripYTStripNbr(fParameterMap[lbl]);
-			fMust2Data->SetMMStripYTTime(val);
+			fMust2Data->SetStripYT(det,fParameterMap[lbl],val);
 			result = true;
 			break;
 		}
@@ -171,9 +164,7 @@ bool G2R::Must2::Is(UShort_t lbl, Short_t val){
 			//cout<<  "- ---------<  SILI E >------------------!\n";
 			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
 			if (fLabelMap[lbl].compare(0,9,"SILIORSAY") == 0) det = 4;
-			fMust2Data->SetMMSiLiEDetectorNbr(det);
-			fMust2Data->SetMMSiLiEPadNbr(fParameterMap[lbl]);
-			fMust2Data->SetMMSiLiEEnergy(val);
+			fMust2Data->SetSiLiE(det,fParameterMap[lbl],val);
 			result = true;
 			break;
 		}
@@ -182,9 +173,7 @@ bool G2R::Must2::Is(UShort_t lbl, Short_t val){
 			//cout<<  " ----------<  SILI T >------------------!\n"; 
 			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
 			if (fLabelMap[lbl].compare(0,9,"SILIORSAY") == 0) det = 4;
-			fMust2Data->SetMMSiLiTDetectorNbr(det);
-			fMust2Data->SetMMSiLiTPadNbr(fParameterMap[lbl]);
-			fMust2Data->SetMMSiLiTTime(val);
+			fMust2Data->SetSiLiT(det,fParameterMap[lbl],val);
 			result = true;
 			break;
 		}
@@ -192,9 +181,7 @@ bool G2R::Must2::Is(UShort_t lbl, Short_t val){
 		case MUST2CSI_E :{  
 			//cout<<  "- ---------<  CSI E  >------------------!\n";
 			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			fMust2Data->SetMMCsIEDetectorNbr(det);
-			fMust2Data->SetMMCsIECristalNbr(fParameterMap[lbl]);
-			fMust2Data->SetMMCsIEEnergy(val);
+			fMust2Data->SetCsIE(det,fParameterMap[lbl],val);
 			result = true;
 			break;
 		}
@@ -202,9 +189,7 @@ bool G2R::Must2::Is(UShort_t lbl, Short_t val){
 		case MUST2CSI_T :{
 			//cout<<  " ----------<  CSI T  >------------------!\n"; 
 			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			fMust2Data->SetMMCsITDetectorNbr(det);
-			fMust2Data->SetMMCsITCristalNbr(fParameterMap[lbl]);
-			fMust2Data->SetMMCsITTime(val);
+			fMust2Data->SetCsIT(det,fParameterMap[lbl],val);
 			result = true;
 			break;
 		}

@@ -57,11 +57,11 @@ for (Int_t index = 0; index < nbParams; index++)
 	Int_t lbl    = params->GetLabel(index);
 	string label = params->GetParNameFromIndex(index);
 	// cout << index << "  " << lbl << "  " << label <<  endl;
-        if(label.compare(0,6,"E_EXL_") == 0 )
+        if(label.compare(0,5,"EXL_E") == 0 )
 	{
 		fLabelMap[lbl] = label;
 		status = true;
-		if(label.compare(0,6,"E_EXL_") == 0 )
+		if(label.compare(0,5,"EXL_E") == 0 )
 		{
 			fTypeMap[lbl] = EXL_E;
 			channum = atoi(label.substr(6).c_str());
