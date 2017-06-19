@@ -48,4 +48,5 @@ add_subdirectory("Core")
 
 # Core 
 add_subdirectory("Detectors/Must2")
+add_subdirectory("Detectors/Exl")
 

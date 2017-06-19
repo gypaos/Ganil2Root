@@ -7,13 +7,13 @@ void ConvertSingle(){
   // specify good include dir!
   gROOT->Reset(); 
   
+
   char command[100];
   gROOT->ProcessLine(command);
   gSystem->Load("GUser.so"); //load and compile GUser class
 
-  //GTape *file = new GTape("/home/muvi/e748_run/run_0002.dat.13-06-17_09h03m29s");
+  GTape *file = new GTape("/home/muvi/e748_run/run_0002.dat.13-06-17_09h03m29s");
   //GTape *file = new GTape("/data/tiara/e628/run/run_1231.dat.25Feb14_23h37m42s.1.gz");
-  GTape *file = new GTape("/data/muviX/must2/acquisition/run/run_0008.dat.15-06-17_19h23m54s");
   file->Open();                          // Open Device
   GUser * a= new GUser(file);            // creat user treatement environement
   GNetServerRoot *serv = new GNetServerRoot(9090, a);
