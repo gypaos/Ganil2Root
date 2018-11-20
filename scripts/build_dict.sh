@@ -69,7 +69,7 @@ fi
 # Version 6 or more : generate both at once
 if [ $version_major -gt 5 ]
   then
-   rootcint -f $1 -rmf $2 -rml $lib_name -I../Core -I../../Core -I$GRUDIR/include -I$NPTOOL/NPLib/include $header $4
+   rootcint -f $1 -rmf $2 -rml $lib_name -I../Core -I../../Core -I$GRUDIR/include -I$GRUDIR/MFMlib -I$NPTOOL/NPLib/include $header $4
 fi
 
 

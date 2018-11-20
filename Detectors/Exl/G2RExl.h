@@ -36,7 +36,8 @@
 
 #define	EXL_E	1
 #define	EXL_T	2
-
+#define	EXL_HF 3
+ 
 namespace G2R{
 
   class Exl : public G2R::VDetector {

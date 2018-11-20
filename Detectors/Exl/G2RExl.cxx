@@ -9,9 +9,11 @@
  * Original Author: N. de Sereville  contact address: deserevi@ipno.in2p3.fr *
  *                  J. Burgunder                    burgunder@ganil.in2p3.fr *
  *  Update        : M. Moukaddam                                             *
+ *  Update        : V. Alcindor                                              *
  *                                                                           *
  * Creation Date  : May 2009                                                 *
  * Last update    : June 2017                                                *
+ * Last update    : May 2018                                                 *
  *---------------------------------------------------------------------------*
  * Decription: This class is in charged of converting raw data from GANIL    *
  *             format to a ROOT format for the Exl detector                  *
@@ -59,26 +61,28 @@ bool G2R::Exl::Init(DataParameters *params){
 		Int_t lbl      = params->GetLabel(index);
 		string label   = params->GetParNameFromIndex(index);
 
-		if(label.compare(0,3,"EXL") == 0 )
-		{
+		if(label.compare(0,3,"EXL") == 0 ){
 			status = true;
 			fLabelMap[lbl] = label;
-			cout << " passed  index " << lbl << "  Label from Map " << fLabelMap[lbl]  << endl; 
 
-			if(label.compare(4,1,"E") == 0 )
-			{
+			if(label.compare(0,5,"EXL_E") == 0 ){
 				fTypeMap[lbl] = EXL_E;
 				channum = atoi(label.substr(5).c_str());
-				fParameterMap[lbl] = channum;                 //EXL signals 1-18 
-				cout << " Energy chan number "  << channum;
+				fParameterMap[lbl] = channum;                 // EXL E signals 1-18 
+				// cout << "Label: "<< label <<  " Energy chan number: "  << channum << endl;
 			}
-			else if(label.compare(4,1,"T") == 0 )
-			{
+			else if(label.compare(0,5,"EXL_T") == 0 ){
 				fTypeMap[lbl] = EXL_T;
 				channum = atoi(label.substr(5).c_str());
-				fParameterMap[lbl] = channum;                 //EXL signals 1-18 
-				cout << " Time chan number "  << channum;
-			}
+				fParameterMap[lbl] = channum;                 // EXL T signals 1-18 
+        }
+			/* else if(label.compare(0,6,"EXL_HF") == 0 ) */
+			/* { */
+			/* 	fTypeMap[lbl] = EXL_HF; */
+			/* 	channum = atoi(label.substr(5).c_str()); */
+			/* 	fParameterMap[lbl] = channum;                 //EXL signals 1-18 */ 
+			/* 	//cout << "Label: "<< label <<  " Energy chan number: "  << channum << endl; */
+			/* } */
 			else{
 				cout << "G2R::Exl::Init() : problem reading EXL label -> " << label << endl;
 				status = false;
@@ -95,24 +99,37 @@ bool G2R::Exl::Is(UShort_t lbl, Short_t val){
 	Int_t cry;
 	bool result = false;
 
-	switch (fTypeMap[lbl]){
-    
+	switch (fTypeMap[lbl]){ 
+
 		case EXL_E :{  
 			//cout<<  "- ---------< EXL E >------------------!\n";
       //cout << " Label in Map " <<  fLabelMap[lbl] << " cry " << cry << "    val " << val << endl;
-			cry = atoi(fLabelMap[lbl].substr( fLabelMap[lbl].find("_E")+2 ).c_str());
-			fExlData->SetEandTime(1,cry,val,0);
+			cry = atoi(fLabelMap[lbl].substr(fLabelMap[lbl].find("_E")+2).c_str());
+      // cout << "fLabelMap[lbl].substr(fLabelMap[lbl].find(_E)+2).c_str() : "
+      // << fLabelMap[lbl].substr(fLabelMap[lbl].find("_E")+2).c_str() 
+      // << " lbl : " << lbl 
+      // << " cry : " << cry << endl;
+			fExlData->SetEnergy(1, cry, val);
+			result = true;
+			break;
+		}
+
+		case EXL_T :{  
+			//cout<<  "- ---------< EXL T >------------------!\n";
+      //cout << " Label in Map " <<  fLabelMap[lbl] << " cry " << cry << "    val " << val << endl;
+			cry = atoi(fLabelMap[lbl].substr( fLabelMap[lbl].find("_T")+2 ).c_str());
+			fExlData->SetTime(1, cry, val);
 			result = true;
 			break;
 		}
     
-		case EXL_T :{
-			//cout<<  " ----------< EXL T >------------------!\n"; 
-			cry = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			//fExlData->SetTime(det,fParameterMap[lbl],val);
-			result = true;
-			break;
-		}
+		// case EXL_HF :{
+		// 	//cout<<  " ----------< EXL T >------------------!\n"; 
+		// 	cry = atoi(fLabelMap[lbl].substr(2,1).c_str());
+		// 	//fExlData->SetTime(det,fParameterMap[lbl],val);
+		// 	result = true;
+		// 	break;
+		// }
 
 		default: {
 			result = false;

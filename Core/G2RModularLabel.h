@@ -22,11 +22,15 @@
 // GANIL2ROOT
 #include "G2RVDetector.h"
 
+// NPLib
+#include "TModularLeafPhysics.h"
+
 // GRU
 #include "DataParameters.h"
 
 // ROOT 
 #include "TTree.h"
+#include "TH1S.h"
 
 // STL
 #include <map>
@@ -37,22 +41,22 @@ namespace G2R{
   class ModularLabel : public G2R::VDetector {
     public:
       ModularLabel();
-      virtual ~ModularLabel();
+      ~ModularLabel();
 
       // virtual methods from TDetector
-      virtual bool Init(DataParameters*);
-      virtual bool Clear();
-      virtual bool Is(UShort_t, Short_t);
-      virtual bool Treat();
-      virtual void InitBranch(TTree*);
+      bool Init(DataParameters*);
+      bool Clear();
+      bool Is(UShort_t, Short_t);
+      bool Treat();
+      void InitBranch(TTree*);
 
       void Clear(const Option_t*) {};
 
     private:
       // Label ask to be followed by the user
-      set<string>           fRequestedLabel;
+      set<string> fRequestedLabel;
       // Label found in the list
-      map<string,UShort_t>           fFollowedLabel;
+      map<string,UShort_t> fFollowedLabel;
       // Map of Numeric label and associate Value
       map<UShort_t,Short_t> fMapOfLabelValue; 
 
@@ -60,10 +64,22 @@ namespace G2R{
       // Read the user input file to find which label to follow
       void LoadLabel(string path);
       inline map<UShort_t,Short_t>  GetMapOfLabelValue()    {return fMapOfLabelValue;} 
-      inline map<string,UShort_t>            GetFollowedLabel()      {return fFollowedLabel;}
+      inline map<string,UShort_t>   GetFollowedLabel()      {return fFollowedLabel;}
       Short_t GetValue(string label);
+      
+    public: // Spectra related stuff
+      std::map<std::string,TH1S*> GetSpectra(){return fSpectra;};
 
+    private:
+      std::map<std::string,TH1S*> fSpectra;
+      std::map<UShort_t,TH1S*>    fSpectraByLbl;
       ClassDef(G2R::ModularLabel,1)  // MUST2 detector structure
+     
+    private:
+      TModularLeafPhysics* fModularLeafPhysics;
+    
+    public:
+      void SetModularLeafPointer( TModularLeafPhysics* ptr) {fModularLeafPhysics=ptr;};
   };
 }
 #endif
