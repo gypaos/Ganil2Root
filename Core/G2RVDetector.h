@@ -33,6 +33,10 @@
 // C++ headers
 #include <string>
 #include <map>
+
+// G2R headers
+#include "G2RDetectorManager.h"
+
 using namespace std;
 
 namespace G2R{
@@ -46,9 +50,10 @@ namespace G2R{
       virtual bool Is(UShort_t, Short_t)= 0; //!
       virtual bool Treat()= 0;//!
       virtual void InitBranch(TTree*)= 0;//!
+      void SetDetectorManager(G2R::DetectorManager* D) {fDetectorManager=D;};//!
 
       void Clear(const Option_t*) {};//!
-
+    
     public:
       string GetLabelMap(int i)	{return fLabelMap[i];} //!
       void   DumpLabelMap();//!
@@ -56,8 +61,8 @@ namespace G2R{
     protected:
       map<int, string> fLabelMap;//!
       map<int, int>	  fTypeMap;//!
-      map<int, int>	  fParameterMap;//!
-
+      map<int, vector<int>>	  fParameterMap;//!
+      G2R::DetectorManager* fDetectorManager;//! 
 
     protected: // Data Pointer
       void* m_Data;//!

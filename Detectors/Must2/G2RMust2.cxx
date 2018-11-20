@@ -50,10 +50,10 @@ bool G2R::Must2::Clear()
 ////////////////////////////////////////////////////////////////////////////////
 
 bool G2R::Must2::Init(DataParameters *params){ 
-	Int_t channum;
-	Int_t nbParams = params->GetNbParameters();
+	vector<int> channum;
+	int nbParams = params->GetNbParameters();
 	bool status = false;
-
+  int det=-1;
 	for (Int_t index = 0; index < nbParams; index++) {
 		Int_t lbl      = params->GetLabel(index);
 		string label   = params->GetParNameFromIndex(index);
@@ -61,52 +61,56 @@ bool G2R::Must2::Init(DataParameters *params){
 		if (label.compare(0,2,"MM") == 0 ) {
 			status = true;
 			fLabelMap[lbl]	 = label;
-	     
-			if (label.compare(4,6,"STRX_E") == 0 ) {
+	    fDetectorManager->RegisterLabelToDetector(lbl,"MUST2") 
+			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
+		  channum.clear();
+      channum.push_back(det);
+
+      if (label.compare(4,6,"STRX_E") == 0 ) {
 				fTypeMap[lbl] = MUST2STR_XE;
-				channum = atoi(label.substr(10).c_str());
+				channum.push_back(atoi(label.substr(10).c_str()));
 				fParameterMap[lbl] = channum;                 //MM STR X-E signals 1-128 
 			} 
 
 			else if (label.compare(4,6,"STRX_T") == 0 ) {
 				fTypeMap[lbl] = MUST2STR_XT;
-				channum = atoi(label.substr(10).c_str());
+				channum.push_back(atoi(label.substr(10).c_str()));
 				fParameterMap[lbl] = channum;                 //MM STR X-T signals 1-128
 			}
 
 			else if (label.compare(4,6,"STRY_E") == 0 ) {
 				fTypeMap[lbl] = MUST2STR_YE;
-				channum = atoi(label.substr(10).c_str());
+				channum.push_back(atoi(label.substr(10).c_str()));
 				fParameterMap[lbl] = channum;                 //MM STR Y-E signals 1-128 
 			} 
 
 			else if (label.compare(4,6,"STRY_T") == 0 ) {
 				fTypeMap[lbl] = MUST2STR_YT;
-				channum = atoi(label.substr(10).c_str());
+				channum.push_back(atoi(label.substr(10).c_str()));
 				fParameterMap[lbl] = channum;                 //MM STR Y-T signals 1-128 
 			}
 			
       else if (label.compare(4,6,"SILI_E") == 0 ) {
 				fTypeMap[lbl] = MUST2SILI_E;
-				channum = atoi(label.substr(10).c_str());
+				channum.push_back(atoi(label.substr(10).c_str()));
 				fParameterMap[lbl] = channum;                 //MM SILI E signals 1-16
 			} 
 
 			else if (label.compare(4,6,"SILI_T") == 0 ) {
 				fTypeMap[lbl] = MUST2SILI_T;
-				channum = atoi(label.substr(10).c_str());
+				channum.push_back(atoi(label.substr(10).c_str()));
 				fParameterMap[lbl] = channum;                 //MM SILI T signals 1-16
 			}
 			
       else if (label.compare(4,5,"CSI_E") == 0 ) {
 				fTypeMap[lbl] = MUST2CSI_E;
-				channum = atoi(label.substr(9).c_str());
+				channum.push_back(atoi(label.substr(9).c_str()));
 				fParameterMap[lbl] = channum;                 //MM CsI E signals 1-16
 			} 
 
 			else if (label.compare(4,5,"CSI_T") == 0 ) {
 				fTypeMap[lbl] = MUST2CSI_T;
-				channum = atoi(label.substr(9).c_str());
+				channum.push_back(atoi(label.substr(9).c_str()));
 				fParameterMap[lbl] = channum;                 //MM CsI T signals 1-16 
 			} 
 
@@ -129,67 +133,56 @@ bool G2R::Must2::Is(UShort_t lbl, Short_t val){
     
 		case MUST2STR_XE :{  
 			//cout<<  "- ---------< STR X E >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-
-			fMust2Data->SetStripXE(det,fParameterMap[lbl],val);
+			fMust2Data->SetStripXE(fParameterMap[lbl][0],fParameterMap[lbl][1],val);
 			result = true;
 			break;
 		}
     
 		case MUST2STR_XT :{
 			//cout<<  " ----------< STR X T >------------------!\n"; 
-			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			fMust2Data->SetStripXT(det,fParameterMap[lbl],val);
+			fMust2Data->SetStripXT(fParameterMap[lbl][0],fParameterMap[lbl][1],val);
 			result = true;
 			break;
 		}
 
 		case MUST2STR_YE :{  
 			//cout<<  "- ---------< STR Y E >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			fMust2Data->SetStripYE(det,fParameterMap[lbl],val);
+			fMust2Data->SetStripYE(fParameterMap[lbl][0],fParameterMap[lbl][1],val);
 			result = true;
 			break;
 		}
     
 		case MUST2STR_YT :{
 			//cout<<  " ----------< STR Y T >------------------!\n"; 
-			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			fMust2Data->SetStripYT(det,fParameterMap[lbl],val);
+			fMust2Data->SetStripYT(fParameterMap[lbl][0],fParameterMap[lbl][1],val);
 			result = true;
 			break;
 		}
 
 		case MUST2SILI_E :{  
 			//cout<<  "- ---------<  SILI E >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			if (fLabelMap[lbl].compare(0,9,"SILIORSAY") == 0) det = 4;
-			fMust2Data->SetSiLiE(det,fParameterMap[lbl],val);
+			fMust2Data->SetSiLiE(fParameterMap[lbl][0],fParameterMap[lbl][1],val);
 			result = true;
 			break;
 		}
     
 		case MUST2SILI_T :{
 			//cout<<  " ----------<  SILI T >------------------!\n"; 
-			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			if (fLabelMap[lbl].compare(0,9,"SILIORSAY") == 0) det = 4;
-			fMust2Data->SetSiLiT(det,fParameterMap[lbl],val);
+			fMust2Data->SetSiLiT(fParameterMap[lbl][0],fParameterMap[lbl][1],val);
 			result = true;
 			break;
 		}
 
 		case MUST2CSI_E :{  
 			//cout<<  "- ---------<  CSI E  >------------------!\n";
-			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			fMust2Data->SetCsIE(det,fParameterMap[lbl],val);
+			fMust2Data->SetCsIE(fParameterMap[lbl][0],fParameterMap[lbl][1],val);
 			result = true;
 			break;
 		}
     
 		case MUST2CSI_T :{
 			//cout<<  " ----------<  CSI T  >------------------!\n"; 
-			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
-			fMust2Data->SetCsIT(det,fParameterMap[lbl],val);
+			fMust2Data->SetCsIT(fParameterMap[lbl][0],fParameterMap[lbl][1],val);
 			result = true;
 			break;
 		}
