@@ -34,6 +34,17 @@ G2R::VDetector* G2R::DetectorManager::GetDetector(string DetectorName){
   }
 }
 
+
+////////////////////////////////////////////////////////////////////////////////
+void G2R::DetectorManager::RegisterLabelToDetector(unsigned short label, string Detector){
+  map<unsigned short,string>::iterator it;
+  it=fLabelToDetector.find(label);
+  if(it!=fLabelToDetector.end())
+    fLabelToDetector[label]=Detector;
+  else
+    cout << "WARNING: label " << label << " is already associated with detector " << it->second << endl;  
+  }
+ 
 ///////////////////////////////////////////////////////////////////////////////
 void G2R::DetectorManager::AddDetector(string DetectorName){
 
@@ -47,6 +58,7 @@ void G2R::DetectorManager::AddDetector(string DetectorName){
   if(detector!=NULL){
       cout << "//// G2R Adding Detector " << DetectorName << endl; 
       fDetectorMap[DetectorName] = detector;     
+      detector->SetDetectorManager(this);
   } 
 
 /*  else if(DetectorName=="MUST2"){
@@ -115,13 +127,20 @@ bool G2R::DetectorManager::Init(DataParameters* g){
 
 ///////////////////////////////////////////////////////////////////////////////
 bool G2R::DetectorManager::Is(UShort_t label,Short_t value){
-  map<string,G2R::VDetector*>::iterator it;
 
+  fDetectorMap[fLabelToDetector[label]]->Is(label,value);
+
+  return true; 
+ 
+ /*map<string,G2R::VDetector*>::iterator it;
+
+  
   for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
     it->second->Is(label,value);
   }
-
   return false;
+*/
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

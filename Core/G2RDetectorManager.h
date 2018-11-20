@@ -48,15 +48,17 @@ namespace G2R{
 
     private:
       map<string,G2R::VDetector*> fDetectorMap;
+      map<unsigned short,string>  fLabelToDetector;
 
     public: // G2R framework
       G2R::VDetector* GetDetector(string);
       void AddDetector(string);
       bool Init(DataParameters*);
       bool Clear();
-      bool Is(UShort_t,Short_t);
+      bool Is(unsigned short , unsigned short);
       bool Treat();
       void InitBranch(TTree*);
+      void RegisterLabelToDetector(unsigned short label, string Detector);
     
     public: // For nptool compatibility
       void SetRawDataPointer(NPL::DetectorManager*);

@@ -38,12 +38,12 @@
 #define CATS_X		1
 #define CATS_Y		2
 #define CATS_Q		3
-
-class TCATS : public TDetector 
+namespace G2R{
+class CATS : public TDetector 
 {
  public:
-	TCATS();
-	virtual ~TCATS();
+	CATS();
+	virtual ~CATS();
 	// virtual methods from TDetector
 	virtual bool Init(DataParameters*);
 	virtual bool Clear();
@@ -55,12 +55,13 @@ class TCATS : public TDetector
 
 	// getters and setters
 	TCATSData*     GetCATSData()     const {return fCATSData;}
+  static G2R::VDetector* G2R::CATS::Construct();
 
  private:
 	// Data class for TCATSData
 	TCATSData    *fCATSData;
 
-	ClassDef(TCATS,2)  // CATS detector structure
+	ClassDef(CATS,2)  // CATS detector structure
 };
-
+}
 #endif
