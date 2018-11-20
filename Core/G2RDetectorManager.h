@@ -30,15 +30,17 @@ using namespace std;
 
 // ROOT
 #include "TTree.h"
-
+#include "TH1S.h"
 // GANIL2ROOT
 #include "G2RVDetector.h"
+#include "G2RModularLabel.h"
 
 //GRU
 #include "DataParameters.h"
 
 // nptool
 #include "NPDetectorManager.h"
+#include "TModularLeafPhysics.h"
 
 namespace G2R{
   class DetectorManager{
@@ -50,6 +52,8 @@ namespace G2R{
       map<string,G2R::VDetector*> fDetectorMap;
 
     public: // G2R framework
+
+      G2R::ModularLabel* fModularLabel;
       G2R::VDetector* GetDetector(string);
       void AddDetector(string);
       bool Init(DataParameters*);
@@ -60,6 +64,11 @@ namespace G2R{
     
     public: // For nptool compatibility
       void SetRawDataPointer(NPL::DetectorManager*);
+      void SetModularLeafPointer(TModularLeafPhysics* ptr){fModularLabel->SetModularLeafPointer(ptr);}; 
+
+    public: // for GRU spectra compatibility
+      std::map<std::string,TH1S*> GetModularLabelSpectra(){return fModularLabel->GetSpectra();};
+      double GetModularLabelValue(string label){return fModularLabel->GetValue(label);};
 
       
   };

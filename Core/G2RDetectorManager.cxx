@@ -9,6 +9,8 @@ using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
 G2R::DetectorManager::DetectorManager(){
+  fModularLabel = new G2R::ModularLabel;
+  fModularLabel->LoadLabel("ModularLabel.txt");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -18,8 +20,8 @@ G2R::DetectorManager::~DetectorManager(){
   for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {  
     delete it->second;
   }
-
   fDetectorMap.clear();
+  delete fModularLabel;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -48,68 +50,17 @@ void G2R::DetectorManager::AddDetector(string DetectorName){
       cout << "//// G2R Adding Detector " << DetectorName << endl; 
       fDetectorMap[DetectorName] = detector;     
   } 
-
-/*  else if(DetectorName=="MUST2"){
-    G2R::VDetector* det = new TMust2();
-    fDetectorMap["MUST2"] = det;
-  }
-
-  else if(DetectorName=="CATS"){
-    G2R::VDetector* det = new TCATS();
-    fDetectorMap["CATS"] = det;
-  }
-  else if(DetectorName=="EXOGAM"){
-    G2R::VDetector* det = new TExogam();
-    fDetectorMap["EXOGAM"] = det;
-  }
-  else if(DetectorName=="Charissa"){
-    G2R::VDetector* det = new TCharissa();
-    fDetectorMap["Charissa"] = det;
-  }
-  else if(DetectorName=="TiaraBarrel"){
-    G2R::VDetector* det = new TTiaraBarrel();
-    fDetectorMap["TiaraBarrel"] = det;
-  }
-  else if(DetectorName=="TiaraHyball"){
-    G2R::VDetector* det = new TTiaraHyball();
-    fDetectorMap["TiaraHyball"] = det;
-  }
-  else if(DetectorName=="Trigger"){
-    G2R::VDetector* det = new TTrigger();
-    fDetectorMap["Trigger"] = det;
-  }
-  else if(DetectorName=="Plastic"){
-    G2R::VDetector* det = new TPlastic();
-    fDetectorMap["Plastic"] = det;
-  }
-  else if(DetectorName=="SiLi"){
-    G2R::VDetector* det = new TSiLi();
-    fDetectorMap["SiLi"] = det;
-  }
-  else if(DetectorName=="SiRes"){
-    G2R::VDetector* det = new TSiRes();
-    fDetectorMap["SiRes"] = det;
-  }
-  else if(DetectorName=="LaBr3"){
-    G2R::VDetector* det = new TLaBr3();
-    fDetectorMap["LaBr3"] = det;
-  }
-  else if(DetectorName=="Lise"){
-    G2R::VDetector* det = new TLise();
-    fDetectorMap["Lise"] = det;
-  }
-*/
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool G2R::DetectorManager::Init(DataParameters* g){
   map<string,G2R::VDetector*>::iterator it;
   bool result = true;
+  fModularLabel->Init(g);
 
   for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
     it->second->Init(g);
   }
-
   return result;
 }
 
@@ -120,6 +71,7 @@ bool G2R::DetectorManager::Is(UShort_t label,Short_t value){
   for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
     it->second->Is(label,value);
   }
+  fModularLabel->Is(label,value);
 
   return false;
 }
@@ -132,6 +84,7 @@ bool G2R::DetectorManager::Clear(){
   for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
     result = result && it->second->Clear();
   }
+  fModularLabel->Clear();
 
   return result;
 }
@@ -143,9 +96,11 @@ void G2R::DetectorManager::InitBranch(TTree* tree){
   for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
     it->second->InitBranch(tree);
   }
+  fModularLabel->InitBranch(tree);
 }
 ///////////////////////////////////////////////////////////////////////////////
 bool G2R::DetectorManager::Treat(){
+  fModularLabel->Treat();
   return true;
 }
 
@@ -155,7 +110,12 @@ void G2R::DetectorManager::SetRawDataPointer(NPL::DetectorManager* NPDetectorMan
  
   for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
    NPL::VDetector* det = NPDetectorManager->GetDetector(it->first);
-   det->SetRawDataPointer(it->second->GetData());
-  } 
+    det->SetRawDataPointer(it->second->GetData());
+    }
+
+   TModularLeafPhysics* Modular = (TModularLeafPhysics*) (NPDetectorManager->GetDetector("ModularLeaf"));
+   if(Modular)
+    fModularLabel->SetModularLeafPointer(Modular);
+
 }
 
