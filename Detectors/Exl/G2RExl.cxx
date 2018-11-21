@@ -68,13 +68,13 @@ bool G2R::Exl::Init(DataParameters *params){
 			if(label.compare(0,5,"EXL_E") == 0 ){
 				fTypeMap[lbl] = EXL_E;
 				channum = atoi(label.substr(5).c_str());
-				fParameterMap[lbl] = channum;                 // EXL E signals 1-18 
+				//fParameterMap[lbl] = channum;                 // EXL E signals 1-18 
 				// cout << "Label: "<< label <<  " Energy chan number: "  << channum << endl;
 			}
 			else if(label.compare(0,5,"EXL_T") == 0 ){
 				fTypeMap[lbl] = EXL_T;
 				channum = atoi(label.substr(5).c_str());
-				fParameterMap[lbl] = channum;                 // EXL T signals 1-18 
+				//fParameterMap[lbl] = channum;                 // EXL T signals 1-18 
         }
 			/* else if(label.compare(0,6,"EXL_HF") == 0 ) */
 			/* { */

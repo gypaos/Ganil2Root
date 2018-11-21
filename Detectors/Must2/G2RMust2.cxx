@@ -62,7 +62,7 @@ bool G2R::Must2::Init(DataParameters *params){
 		if (label.compare(0,2,"MM") == 0 ) {
 			status = true;
 			fLabelMap[lbl]	 = label;
-	    fDetectorManager->RegisterLabelToDetector(lbl,"MUST2") 
+	    fDetectorManager->RegisterLabelToDetector(lbl,"MUST2"); 
 			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
 		  channum.clear();
       channum.push_back(det);

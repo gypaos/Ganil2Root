@@ -22,18 +22,19 @@
  *****************************************************************************/
 #include "G2RCATS.h"
 #include "G2RDetectorManager.h"
+#include "G2RDetectorFactory.h"
 
 #include <cstdlib>
 #include <string>
 using namespace std;
 
 
-ClassImp(CATS)
+ClassImp(G2R::CATS)
 
 ////////////////////////////////////////////////////////////////////////////////
 G2R::CATS::CATS(){
 	// Default constructor
-	fCATSData    = new G2R::CATSData();
+	fCATSData    = new TCATSData();
 }
 
 
@@ -66,7 +67,7 @@ bool G2R::CATS::Init(DataParameters *params){
 			status = true;
       fDetectorManager->RegisterLabelToDetector(lbl,"CATS");
 			det = atoi(fLabelMap[lbl].substr(4,1).c_str());
-      channum.push_back(det)
+      channum.push_back(det);
 
       if (label.compare(6,1,"X") == 0 ) {
 				fTypeMap[lbl] = CATS_X;
@@ -101,26 +102,21 @@ bool G2R::CATS::Is(UShort_t lbl, Short_t val){
     
 		case CATS_X :{  
 			//cout<<  "- ---------< CATS X E >------------------!\n";
-			fCATSData->SetCATSDetX(fParameterMap[lbl][0]);
-			fCATSData->SetCATSStripX(fParameterMap[lbl][1]);
-			fCATSData->SetCATSChargeX(val);
+			fCATSData->SetStripX(fParameterMap[lbl][0],fParameterMap[lbl][1],val);
 			result = true;
 			break;
 		}
     
 		case CATS_Y :{  
 			//cout<<  "- ---------< CATS Y E >------------------!\n";
-      fCATSData->SetCATSDetY(fParameterMap[lbl][0]);
-      fCATSData->SetCATSStripY(fParameterMap[lbl][1]);
-      fCATSData->SetCATSChargeY(val);
+      fCATSData->SetStripY(fParameterMap[lbl][0],fParameterMap[lbl][1],val);
       result = true;
       break;
     }
 
     case CATS_Q :{  
       //cout<<  "- ---------<  CATS Q >------------------!\n";
-      fCATSData->SetCATSDetQ(fParameterMap[lbl][0]);
-      fCATSData->SetCATSCharge(val);
+      fCATSData->SetQ(fParameterMap[lbl][0],val);
       result = true;
     }
 
@@ -157,8 +153,8 @@ extern "C"{
 class proxy_g2r_cats{
   public:
     proxy_g2r_cats(){
-      G2R::DetectorFactory::getInstance()->AddToken("M2Telescope","MUST2");
-      G2R::DetectorFactory::getInstance()->AddDetector("M2Telescope",G2R::CATS::Construct);
+      G2R::DetectorFactory::getInstance()->AddToken("CATS","CATS");
+      G2R::DetectorFactory::getInstance()->AddDetector("CATS",G2R::CATS::Construct);
     }
 };
 

@@ -21,12 +21,10 @@
  *    + decem 2013: Remove support for TCATSPhysics from NPTool              *
  *                                                                           *
  *****************************************************************************/
-#ifndef __CATS__
-#define __CATS__
+#ifndef G2RCATS_H
+#define G2RCATS_H
 
-#ifndef __DETECTOR__
-#include "TDetector.h"
-#endif
+#include "G2RVDetector.h"
 
 #ifndef __CATSDATA__
 #include "TCATSData.h"
@@ -39,7 +37,7 @@
 #define CATS_Y		2
 #define CATS_Q		3
 namespace G2R{
-class CATS : public TDetector 
+class CATS : public G2R::VDetector 
 {
  public:
 	CATS();
@@ -55,7 +53,7 @@ class CATS : public TDetector
 
 	// getters and setters
 	TCATSData*     GetCATSData()     const {return fCATSData;}
-  static G2R::VDetector* G2R::CATS::Construct();
+  static G2R::VDetector* Construct();
 
  private:
 	// Data class for TCATSData
