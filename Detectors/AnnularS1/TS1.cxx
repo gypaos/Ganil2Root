@@ -212,7 +212,7 @@ bool TS1::Init(DataParameters *params){
 
 
 ////////////////////////////////////////////////////////////////////////////////
-bool TS1::Is(UShort_t lbl, Short_t val){
+bool TS1::Is(unsigned short lbl, unsigned short val){
   bool status = false;
   switch (fTypeMap[lbl]) {
 

@@ -62,7 +62,7 @@ namespace G2R{
       bool Is(unsigned short , unsigned short);
       bool Treat();
       void InitBranch(TTree*);
-      void RegisterLabelToDetector(int label, string Detector);
+      void RegisterLabelToDetector(unsigned short label, string Detector);
     
     public: // For nptool compatibility
       void SetRawDataPointer(NPL::DetectorManager*);

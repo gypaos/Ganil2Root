@@ -51,7 +51,7 @@ namespace G2R{
       // virtual methods from TDetector
       virtual bool Init(DataParameters*);
       virtual bool Clear();
-      virtual bool Is(UShort_t, Short_t);
+      virtual bool Is(unsigned short, unsigned short);
       virtual bool Treat();
       virtual void InitBranch(TTree*);
 

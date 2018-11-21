@@ -48,7 +48,7 @@ namespace G2R{
 
       virtual bool Init(DataParameters*)= 0;//!
       virtual bool Clear()= 0;//!
-      virtual bool Is(UShort_t, Short_t)= 0; //!
+      virtual bool Is(unsigned short, unsigned short)= 0; //!
       virtual bool Treat()= 0;//!
       virtual void InitBranch(TTree*)= 0;//!
       void SetDetectorManager(G2R::DetectorManager* D) {fDetectorManager=D;};//!
@@ -62,7 +62,7 @@ namespace G2R{
     protected:
       map<int, string> fLabelMap;//!
       map<int, int>	  fTypeMap;//!
-      map<int, vector<int>>	  fParameterMap;//!
+      map<int, vector<int> >	  fParameterMap;//!
       G2R::DetectorManager* fDetectorManager;//! 
 
     protected: // Data Pointer

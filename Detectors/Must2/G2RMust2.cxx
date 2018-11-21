@@ -56,13 +56,13 @@ bool G2R::Must2::Init(DataParameters *params){
 	bool status = false;
   int det=-1;
 	for (Int_t index = 0; index < nbParams; index++) {
-		Int_t lbl      = params->GetLabel(index);
+		unsigned short lbl      = params->GetLabel(index);
 		string label   = params->GetParNameFromIndex(index);
 
 		if (label.compare(0,2,"MM") == 0 ) {
 			status = true;
 			fLabelMap[lbl]	 = label;
-	    fDetectorManager->RegisterLabelToDetector(lbl,"MUST2"); 
+	    fDetectorManager->RegisterLabelToDetector(lbl,"M2Telescope"); 
 			det = atoi(fLabelMap[lbl].substr(2,1).c_str());
 		  channum.clear();
       channum.push_back(det);
@@ -126,12 +126,10 @@ bool G2R::Must2::Init(DataParameters *params){
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-bool G2R::Must2::Is(UShort_t lbl, Short_t val){
-	Int_t det;
+bool G2R::Must2::Is(unsigned short  lbl, unsigned short  val){
 	bool result = false;
-
 	switch (fTypeMap[lbl]){
-    
+      
 		case MUST2STR_XE :{  
 			//cout<<  "- ---------< STR X E >------------------!\n";
 			fMust2Data->SetStripXE(fParameterMap[lbl][0],fParameterMap[lbl][1],val);

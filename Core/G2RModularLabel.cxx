@@ -99,7 +99,7 @@ bool G2R::ModularLabel::Init(DataParameters *params){
   return status;
 }
 ////////////////////////////////////////////////////
-bool G2R::ModularLabel::Is(UShort_t lbl, Short_t val){
+bool G2R::ModularLabel::Is(unsigned short lbl, unsigned short val){
   bool result = false;
 
   // Find lbl in the map

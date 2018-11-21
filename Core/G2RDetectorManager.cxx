@@ -11,6 +11,7 @@ using namespace std;
 G2R::DetectorManager::DetectorManager(){
   fModularLabel = new G2R::ModularLabel;
   fModularLabel->LoadLabel("ModularLabel.txt");
+fLabelToDetector.clear();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -38,10 +39,10 @@ G2R::VDetector* G2R::DetectorManager::GetDetector(string DetectorName){
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void G2R::DetectorManager::RegisterLabelToDetector(int label, string Detector){
+void G2R::DetectorManager::RegisterLabelToDetector(unsigned short label, string Detector){
   map<unsigned short,string>::iterator it;
   it=fLabelToDetector.find(label);
-  if(it!=fLabelToDetector.end())
+  if(it==fLabelToDetector.end())
     fLabelToDetector[label]=Detector;
   else
     cout << "WARNING: label " << label << " is already associated with detector " << it->second << endl;  
@@ -79,8 +80,11 @@ bool G2R::DetectorManager::Init(DataParameters* g){
 ///////////////////////////////////////////////////////////////////////////////
 bool G2R::DetectorManager::Is(unsigned short label,unsigned short value){
 
-  fDetectorMap[fLabelToDetector[label]]->Is(label,value);
-
+  static map<unsigned short,string>::iterator it;
+  it=fLabelToDetector.find(label);
+  if(it!=fLabelToDetector.end()){
+    fDetectorMap[it->second]->Is(label,value);
+}
   return true; 
  
  /*map<string,G2R::VDetector*>::iterator it;

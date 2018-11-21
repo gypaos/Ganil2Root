@@ -94,7 +94,7 @@ bool G2R::Exl::Init(DataParameters *params){
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-bool G2R::Exl::Is(UShort_t lbl, Short_t val){
+bool G2R::Exl::Is(unsigned short  lbl, unsigned short val){
 	Int_t det;
 	Int_t cry;
 	bool result = false;
