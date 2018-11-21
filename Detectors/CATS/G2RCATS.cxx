@@ -21,6 +21,7 @@
  *                                                                           *
  *****************************************************************************/
 #include "G2RCATS.h"
+#include "G2RDetectorManager.h"
 
 #include <cstdlib>
 #include <string>

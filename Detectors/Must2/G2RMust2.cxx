@@ -22,6 +22,7 @@
  *****************************************************************************/
 #include "G2RMust2.h"
 #include "G2RDetectorFactory.h"
+#include "G2RDetectorManager.h"
 #include <string>
 #include <cstdlib>
 using namespace std;

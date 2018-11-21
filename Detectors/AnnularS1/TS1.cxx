@@ -22,6 +22,7 @@
  *                                                                           *
  *****************************************************************************/
 #include "TS1.h"
+#include "G2RDetectorManager.h"
 
 #include <string>
 #include <cstdlib>

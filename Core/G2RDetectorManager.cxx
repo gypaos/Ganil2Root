@@ -38,7 +38,7 @@ G2R::VDetector* G2R::DetectorManager::GetDetector(string DetectorName){
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void G2R::DetectorManager::RegisterLabelToDetector(unsigned short label, string Detector){
+void G2R::DetectorManager::RegisterLabelToDetector(int label, string Detector){
   map<unsigned short,string>::iterator it;
   it=fLabelToDetector.find(label);
   if(it!=fLabelToDetector.end())
