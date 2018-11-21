@@ -1,3 +1,5 @@
+#ifndef G2RMODULARLABEL
+#define G2RMODULARLABEL
 /*****************************************************************************
  * Copyright (C) 2014   this file is part of the Ganil2Root Project          *
  *                                                                           *
@@ -16,8 +18,6 @@
  *---------------------------------------------------------------------------*
  * Comment:                                                                  *
  *****************************************************************************/
-#ifndef G2RMODULARLABEL
-#define G2RMODULARLABEL
 
 // GANIL2ROOT
 #include "G2RVDetector.h"

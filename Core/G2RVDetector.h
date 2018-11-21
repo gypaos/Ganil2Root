@@ -34,9 +34,10 @@
 #include <string>
 #include <map>
 
-// G2R headers
-#include "G2RDetectorManager.h"
-
+// DetectorManager forward declarations
+namespace G2R{
+class DetectorManager;
+}
 using namespace std;
 
 namespace G2R{

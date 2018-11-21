@@ -77,7 +77,7 @@ bool G2R::DetectorManager::Init(DataParameters* g){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool G2R::DetectorManager::Is(UShort_t label,Short_t value){
+bool G2R::DetectorManager::Is(unsigned short label,unsigned short value){
 
   fDetectorMap[fLabelToDetector[label]]->Is(label,value);
 
