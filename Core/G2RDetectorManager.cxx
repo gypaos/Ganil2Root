@@ -9,8 +9,8 @@ using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
 G2R::DetectorManager::DetectorManager(){
-  fModularLabel = new G2R::ModularLabel;
-  fModularLabel->LoadLabel("ModularLabel.txt");
+ fModularLabel = new G2R::ModularLabel;
+ fModularLabel->LoadLabel("ModularLabel.txt");
 fLabelToDetector.clear();
 }
 
@@ -22,7 +22,7 @@ G2R::DetectorManager::~DetectorManager(){
     delete it->second;
   }
   fDetectorMap.clear();
-  delete fModularLabel;
+ delete fModularLabel;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -79,12 +79,15 @@ bool G2R::DetectorManager::Init(DataParameters* g){
 
 ///////////////////////////////////////////////////////////////////////////////
 bool G2R::DetectorManager::Is(unsigned short label,unsigned short value){
-
   static map<unsigned short,string>::iterator it;
   it=fLabelToDetector.find(label);
   if(it!=fLabelToDetector.end()){
     fDetectorMap[it->second]->Is(label,value);
-}
+  }
+  else{
+        fModularLabel->Is(label,value);
+    }
+
   return true; 
  
  /*map<string,G2R::VDetector*>::iterator it;
@@ -93,7 +96,6 @@ bool G2R::DetectorManager::Is(unsigned short label,unsigned short value){
   for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
     it->second->Is(label,value);
   }
-  fModularLabel->Is(label,value);
   return false;
 */
 

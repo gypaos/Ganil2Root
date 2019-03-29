@@ -108,6 +108,7 @@ bool G2R::ModularLabel::Is(unsigned short lbl, unsigned short val){
     //fSpectraByLbl[lbl]->Fill(val);
     result=true;
   }
+    // std::cout <<"G2R : "<< fMapOfLabelValue[lbl] << std::endl;
 
   return result;
 }
