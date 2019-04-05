@@ -35,6 +35,8 @@ ClassImp(G2R::CATS)
 G2R::CATS::CATS(){
 	// Default constructor
 	fCATSData    = new TCATSData();
+  // Initialise the generic pointer from base class
+  m_Data = fCATSData;
 }
 
 
@@ -53,29 +55,32 @@ bool G2R::CATS::Clear(){
 
 ////////////////////////////////////////////////////////////////////////////////
 bool G2R::CATS::Init(DataParameters *params){
+  cout << "INIT CATS ?????????? ???????????????????? "<< endl;
 	vector<int> channum;
 	int nbParams = params->GetNbParameters();
 	bool status = false;
   int det;
 	for (Int_t index = 0; index < nbParams; index++) {
 		Int_t lbl    = params->GetLabel(index);
-		string label = params->GetParNameFromIndex(index);
-		//cout << index << "  " << lbl << "  " << label << "  " << fLabelMap[lbl] << endl;
+    string label = params->GetParNameFromIndex(index);
 
 		if (label.compare(0,4,"CATS") == 0 ) { 
 			fLabelMap[lbl] = label;
 			status = true;
-      fDetectorManager->RegisterLabelToDetector(lbl,"CATS");
+      // fDetectorManager->RegisterLabelToDetector(lbl,"CATS");
+      fDetectorManager->RegisterLabelToDetector(lbl,"CATSDetector");
 			det = atoi(fLabelMap[lbl].substr(4,1).c_str());
       channum.push_back(det);
 
-      if (label.compare(6,1,"X") == 0 ) {
+      // if (label.compare(6,1,"X") == 0 ) {
+      if (label.compare(5,1,"X") == 0 ) {
 				fTypeMap[lbl] = CATS_X;
 				channum.push_back(atoi(label.substr(7).c_str()));
 				fParameterMap[lbl] = channum;					// CATS X signals 1-28
 				//cout << fTypeMap[lbl] << "  " << fParameterMap[lbl] << endl;
 			} 
-			else if (label.compare(6,1,"Y") == 0 ) {
+			//else if (label.compare(6,1,"Y") == 0 ) {
+		else if (label.compare(5,1,"Y") == 0 ) {
 				fTypeMap[lbl] = CATS_Y;
 				channum.push_back(atoi(label.substr(7).c_str()));
 				fParameterMap[lbl] = channum;                 // CATS Y signals 1-28
@@ -136,7 +141,7 @@ bool G2R::CATS::Treat(){
 }
 ////////////////////////////////////////////////////////////////////////////////
 void G2R::CATS::InitBranch(TTree *tree){
-   tree->Branch("CATS", "G2R::CATSData", &fCATSData);
+   tree->Branch("CATS", "TCATSData", &fCATSData);
    }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -153,8 +158,10 @@ extern "C"{
 class proxy_g2r_cats{
   public:
     proxy_g2r_cats(){
-      G2R::DetectorFactory::getInstance()->AddToken("CATS","CATS");
-      G2R::DetectorFactory::getInstance()->AddDetector("CATS",G2R::CATS::Construct);
+      //  G2R::DetectorFactory::getInstance()->AddToken("CATS","CATS");
+      //  G2R::DetectorFactory::getInstance()->AddDetector("CATS",G2R::CATS::Construct);
+      G2R::DetectorFactory::getInstance()->AddToken("CATSDetector","CATS");
+      G2R::DetectorFactory::getInstance()->AddDetector("CATSDetector",G2R::CATS::Construct);
     }
 };
 

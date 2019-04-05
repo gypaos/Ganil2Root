@@ -24,12 +24,15 @@
 #ifndef G2RCATS_H
 #define G2RCATS_H
 
+#ifndef __DETECTOR__
 #include "G2RVDetector.h"
+#endif
 
 #ifndef __CATSDATA__
 #include "TCATSData.h"
 #endif
 
+//  #include "TCATSData.h"
 #include "DataParameters.h"
 #include "TTree.h"
 
@@ -37,29 +40,31 @@
 #define CATS_Y		2
 #define CATS_Q		3
 namespace G2R{
-class CATS : public G2R::VDetector 
-{
- public:
-	CATS();
-	virtual ~CATS();
-	// virtual methods from TDetector
-	virtual bool Init(DataParameters*);
-	virtual bool Clear();
-	virtual bool Is(unsigned short, unsigned short);
-	virtual bool Treat();
-	virtual void InitBranch(TTree*);
+  class CATS : public G2R::VDetector 
+  {
+    public:
+      CATS();
+      virtual ~CATS();
+      // virtual methods from TDetector
+      virtual bool Init(DataParameters*);
+      virtual bool Clear();
+      virtual bool Is(unsigned short, unsigned short);
+      virtual bool Treat();
+      virtual void InitBranch(TTree*);
 
-   void Clear(const Option_t*) {};
+      void Clear(const Option_t*) {};
 
-	// getters and setters
-	TCATSData*     GetCATSData()     const {return fCATSData;}
-  static G2R::VDetector* Construct();
+      // getters and setters
+      TCATSData*     GetCATSData()     const {return fCATSData;}
 
- private:
-	// Data class for TCATSData
-	TCATSData    *fCATSData;
+    private:
+      // Data class for TCATSData
+      TCATSData    *fCATSData;
 
-	ClassDef(CATS,2)  // CATS detector structure
-};
+    public: // Static constructor to be passed to the Detector Factory 
+      static G2R::VDetector* Construct();
+
+      ClassDef(G2R::CATS,2)  // CATS detector structure
+  };
 }
 #endif

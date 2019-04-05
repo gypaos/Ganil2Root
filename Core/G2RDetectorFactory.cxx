@@ -98,8 +98,8 @@ G2R::VDetector* DetectorFactory::Construct(std::string Token){
       
       std::cout << "Warning: Detector with Token " << Token << " has no Constructor or no Library" << std::endl;
       if(LibError){
-     //   std::cout << "Library loading failes with error: " << std::endl;
-     //   std::cout << LibError << std::endl << std::endl;
+       std::cout << "Library loading fails with error: " << std::endl;
+       std::cout << LibError << std::endl << std::endl;
       }
       
       return NULL;

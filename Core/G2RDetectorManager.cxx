@@ -11,7 +11,7 @@ using namespace std;
 G2R::DetectorManager::DetectorManager(){
  fModularLabel = new G2R::ModularLabel;
  fModularLabel->LoadLabel("ModularLabel.txt");
-fLabelToDetector.clear();
+ fLabelToDetector.clear();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -131,15 +131,25 @@ bool G2R::DetectorManager::Treat(){
 
 ///////////////////////////////////////////////////////////////////////////////
 void G2R::DetectorManager::SetRawDataPointer(NPL::DetectorManager* NPDetectorManager){
-  map<string,G2R::VDetector*>::iterator it;
- 
-  for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
-   NPL::VDetector* det = NPDetectorManager->GetDetector(it->first);
-    det->SetRawDataPointer(it->second->GetData());
-    }
 
-   TModularLeafPhysics* Modular = (TModularLeafPhysics*) (NPDetectorManager->GetDetector("ModularLeaf"));
-   if(Modular)
+  map<string,G2R::VDetector*>::iterator it;
+  vector<string> detector = NPDetectorManager->GetDetectorList();  
+  unsigned int size = detector.size();
+
+  for(unsigned int i = 0 ; i < size ; i++){
+    cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: " << detector[i] << endl;
+  }
+
+  for (it=fDetectorMap.begin(); it!=fDetectorMap.end(); it++) {
+    cout<< "!!!!!!!!!!!!!!!!!!!!!!!!    ??????????????????? ?????!! !!!!!!!!!!!!!!!!!!!! " << it->first << endl; 
+    cout<< "!!!!!!!!!!!!!!!!!!!!!!!!    ??????????????????? ?????!! !!!!!!!!!!!!!!!!!!!! " << it->second->GetData() << endl; 
+    NPL::VDetector* det = NPDetectorManager->GetDetector(it->first);
+    det->SetRawDataPointer(it->second->GetData());
+
+  }
+
+  TModularLeafPhysics* Modular = (TModularLeafPhysics*) (NPDetectorManager->GetDetector("ModularLeaf"));
+  if(Modular)
     fModularLabel->SetModularLeafPointer(Modular);
 
 }
